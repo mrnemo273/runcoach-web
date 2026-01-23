@@ -258,13 +258,14 @@ nav {
   width: 100%;
   height: 50%;
   overflow: hidden;
-  background: var(--white);
+  background: var(--charcoal);
 }
 
 .card-top {
   top: 0;
   border-radius: 8px 8px 0 0;
-  border-bottom: 1px solid rgba(29, 29, 29, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, #2a2a2a, var(--charcoal));
 }
 
 .card-top span {
@@ -281,7 +282,8 @@ nav {
 .card-bottom {
   bottom: 0;
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 3px 6px rgba(29, 29, 29, 0.12);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, var(--charcoal), #151515);
 }
 
 .card-bottom span {
@@ -302,7 +304,6 @@ nav {
   width: 100%;
   height: 50%;
   overflow: hidden;
-  background: var(--white);
   backface-visibility: hidden;
 }
 
@@ -312,7 +313,8 @@ nav {
   transform-origin: bottom center;
   transform: rotateX(0deg);
   z-index: 3;
-  border-bottom: 1px solid rgba(29, 29, 29, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, #2a2a2a, var(--charcoal));
 }
 
 .card-flip-top span {
@@ -332,7 +334,8 @@ nav {
   transform-origin: top center;
   transform: rotateX(90deg);
   z-index: 2;
-  box-shadow: 0 3px 6px rgba(29, 29, 29, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, var(--charcoal), #151515);
 }
 
 .card-flip-bottom span {
@@ -346,7 +349,7 @@ nav {
   justify-content: center;
 }
 
-/* Shared text styling */
+/* Shared text styling - white with subtle 3D effect */
 .card-top span,
 .card-bottom span,
 .card-flip-top span,
@@ -354,8 +357,12 @@ nav {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 52px;
   line-height: 1;
-  color: var(--charcoal);
+  color: var(--white);
   font-weight: 400;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1),
+    0 -1px 1px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Initial load animation */
@@ -370,12 +377,12 @@ nav {
 
 /* Real-time flip animation */
 .flip-card.flipping .card-flip-top {
-  animation: flipTopDown 0.35s ease-in forwards;
+  animation: flipTopDown 0.4s ease-in forwards;
 }
 
 .flip-card.flipping .card-flip-bottom {
-  animation: flipBottomUp 0.35s ease-out forwards;
-  animation-delay: 0.18s;
+  animation: flipBottomUp 0.4s ease-out forwards;
+  animation-delay: 0.2s;
 }
 
 /* Initial entrance - top flips down */
