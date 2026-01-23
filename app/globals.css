@@ -1279,11 +1279,7 @@ header {
   box-shadow: none;
 }
 
-/* Past days - light gray background, muted text */
-.cal-day-past {
-  background: var(--cream-dark);
-}
-
+/* Past days - muted text, no fill */
 .cal-day-past .cal-day-num,
 .cal-day-past .cal-day-type,
 .cal-day-past .cal-day-distance,
@@ -1293,12 +1289,14 @@ header {
   opacity: 0.7;
 }
 
-/* Run type borders */
-.cal-day-short { border-color: #81C784; }
-.cal-day-medium { border-color: #64B5F6; }
-.cal-day-long { border-color: var(--burnt-orange); }
-.cal-day-strength { border-color: #AB47BC; }
-.cal-day-rest { border-color: var(--stone-light); }
+/* All day cards use uniform gray border - no colored strokes */
+.cal-day-short,
+.cal-day-medium,
+.cal-day-long,
+.cal-day-strength,
+.cal-day-rest {
+  border-color: var(--stone-light);
+}
 
 /* Today highlight */
 .cal-day-today {
