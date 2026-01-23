@@ -86,7 +86,7 @@ header {
 }
 
 .logo-text {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 32px;
   letter-spacing: 2px;
   color: var(--charcoal);
@@ -103,7 +103,7 @@ header {
 }
 
 .nav-link {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 15px;
   letter-spacing: 1.5px;
   padding: 12px 20px;
@@ -231,7 +231,7 @@ header {
 }
 
 .mobile-nav-link {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 32px;
   letter-spacing: 3px;
   padding: 16px 32px;
@@ -336,7 +336,7 @@ header {
 }
 
 .race-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   letter-spacing: 3px;
   color: var(--burnt-orange);
@@ -354,7 +354,7 @@ header {
 }
 
 .race-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: clamp(48px, 8vw, 72px);
   line-height: 0.95;
   letter-spacing: -1px;
@@ -386,7 +386,7 @@ header {
 }
 
 .countdown-value {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 64px;
   line-height: 1;
   color: var(--charcoal);
@@ -404,7 +404,7 @@ header {
 }
 
 .countdown-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 12px;
   letter-spacing: 2px;
   color: var(--stone);
@@ -537,7 +537,7 @@ header {
 .card-bottom span,
 .card-flip-top span,
 .card-flip-bottom span {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 52px;
   line-height: 1;
   color: var(--white);
@@ -648,7 +648,7 @@ header {
 }
 
 .stat-value {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 42px;
   color: var(--charcoal);
   line-height: 1;
@@ -720,7 +720,7 @@ header {
 }
 
 .card-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   letter-spacing: 1px;
   color: var(--charcoal);
@@ -769,7 +769,7 @@ header {
 }
 
 .progress-percent {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   color: var(--charcoal);
   line-height: 1;
@@ -820,7 +820,7 @@ header {
 }
 
 .legend-text {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 12px;
   letter-spacing: 1px;
   color: var(--stone);
@@ -843,7 +843,7 @@ header {
 }
 
 .chart-y-axis span {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 13px;
   color: var(--stone);
   line-height: 1;
@@ -919,7 +919,7 @@ header {
 }
 
 .chart-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 10px;
   color: var(--stone);
   white-space: nowrap;
@@ -996,7 +996,7 @@ header {
 }
 
 .run-date-day {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   line-height: 1;
   color: var(--charcoal);
@@ -1016,7 +1016,7 @@ header {
 }
 
 .run-distance {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 20px;
   color: var(--charcoal);
   transition: color 0.3s ease;
@@ -1029,7 +1029,7 @@ header {
 }
 
 .run-pace {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   padding: 8px 14px;
   background: var(--cream-dark);
@@ -1051,7 +1051,7 @@ header {
 }
 
 .section-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   letter-spacing: 1px;
 }
@@ -1104,7 +1104,7 @@ header {
 }
 
 .milestone-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   letter-spacing: 0.5px;
   margin-bottom: 4px;
@@ -1168,7 +1168,7 @@ header {
 }
 
 .insight-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -1211,7 +1211,7 @@ header {
 }
 
 .cal-month-header h3 {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   letter-spacing: 2px;
   color: var(--charcoal);
@@ -1344,7 +1344,7 @@ header {
 }
 
 .cal-day-num {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 22px;
   color: var(--charcoal);
 }
@@ -1382,7 +1382,7 @@ header {
 }
 
 .cal-day-distance {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   color: var(--charcoal);
 }
@@ -1483,7 +1483,7 @@ header {
 }
 
 .week-num {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 20px;
   color: var(--charcoal);
 }
@@ -1574,7 +1574,7 @@ header {
 .zone5 { background: #E63946; }
 
 .hr-zone-value {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   text-align: right;
 }
@@ -1639,7 +1639,7 @@ footer strong {
 }
 
 .races-section-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   color: var(--charcoal);
   margin-bottom: 24px;
@@ -1746,7 +1746,7 @@ footer strong {
 }
 
 .race-card-distance {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 12px;
   letter-spacing: 1px;
   color: var(--white);
@@ -1756,21 +1756,21 @@ footer strong {
 }
 
 .race-card-countdown {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   color: var(--forest-green);
   letter-spacing: 0.5px;
 }
 
 .race-card-finish {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   color: var(--forest-green);
   letter-spacing: 0.5px;
 }
 
 .race-card-name {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   color: var(--charcoal);
   margin-bottom: 12px;
@@ -1818,7 +1818,7 @@ footer strong {
 
 .goal-time,
 .result-time {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   color: var(--charcoal);
 }
@@ -2037,7 +2037,7 @@ footer strong {
 }
 
 .sheet-distance {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 12px;
   letter-spacing: 1px;
   color: var(--white);
@@ -2049,7 +2049,7 @@ footer strong {
 }
 
 .sheet-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 32px;
   color: var(--white);
   margin: 0;
@@ -2120,7 +2120,7 @@ footer strong {
 }
 
 .sheet-section-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   color: var(--charcoal);
   margin-bottom: 12px;
@@ -2179,7 +2179,7 @@ footer strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   flex-shrink: 0;
 }
@@ -2216,7 +2216,7 @@ footer strong {
 }
 
 .toggle-label-large {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   color: var(--charcoal);
   letter-spacing: 0.5px;
@@ -2315,7 +2315,7 @@ footer strong {
 }
 
 .add-race-text {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   color: var(--charcoal);
   letter-spacing: 0.5px;
@@ -2389,7 +2389,7 @@ footer strong {
 }
 
 .modal-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 32px;
   color: var(--charcoal);
   margin-bottom: 8px;
@@ -2420,7 +2420,7 @@ footer strong {
 }
 
 .form-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   letter-spacing: 0.5px;
   color: var(--charcoal);
@@ -2454,7 +2454,7 @@ footer strong {
   color: var(--white);
   border: none;
   border-radius: 12px;
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   letter-spacing: 1px;
   cursor: pointer;
@@ -2540,7 +2540,7 @@ footer strong {
 
 /* Zone Headers */
 .zone-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   color: var(--charcoal);
   margin-bottom: 4px;
@@ -2588,7 +2588,7 @@ footer strong {
 }
 
 .upload-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   color: var(--charcoal);
   margin-bottom: 8px;
@@ -2605,7 +2605,7 @@ footer strong {
   padding: 14px 32px;
   background: var(--charcoal);
   color: var(--white);
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
   border: none;
@@ -2714,7 +2714,7 @@ footer strong {
 }
 
 .extracted-header {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   color: var(--forest);
   margin-bottom: 16px;
@@ -2734,7 +2734,7 @@ footer strong {
 }
 
 .extracted-value {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 28px;
   color: var(--charcoal);
 }
@@ -2757,7 +2757,7 @@ footer strong {
 }
 
 .feelings-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 24px;
   color: var(--charcoal);
   margin-bottom: 8px;
@@ -2775,7 +2775,7 @@ footer strong {
 }
 
 .feeling-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
   color: var(--charcoal);
@@ -2837,7 +2837,7 @@ footer strong {
 }
 
 .notes-label {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
   color: var(--charcoal);
@@ -2881,7 +2881,7 @@ footer strong {
   padding: 18px 40px;
   background: var(--charcoal);
   color: var(--white);
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
   border: none;
@@ -2950,7 +2950,7 @@ footer strong {
 }
 
 .success-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 32px;
   color: var(--forest);
   margin-bottom: 8px;
@@ -2966,7 +2966,7 @@ footer strong {
   padding: 14px 32px;
   background: var(--forest);
   color: var(--white);
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
   border: none;
@@ -3106,7 +3106,7 @@ footer strong {
 }
 
 .toast-title {
-  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 18px;
   letter-spacing: 0.5px;
   margin-bottom: 4px;
