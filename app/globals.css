@@ -468,11 +468,12 @@ nav {
 .chart-area {
   flex: 1;
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;
   justify-content: space-between;
   border-left: 1px solid var(--cream-dark);
   border-bottom: 1px solid var(--cream-dark);
   padding: 0 8px;
+  padding-bottom: 28px;
   position: relative;
 }
 
@@ -498,16 +499,17 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
   flex: 1;
   max-width: 80px;
+  height: 100%;
+  position: relative;
 }
 
 .bar-pair {
   display: flex;
   gap: 4px;
   align-items: flex-end;
-  height: 100%;
+  flex: 1;
   width: 100%;
   justify-content: center;
 }
@@ -538,7 +540,8 @@ nav {
   color: var(--stone);
   white-space: nowrap;
   letter-spacing: 0.5px;
-  margin-top: 4px;
+  position: absolute;
+  bottom: 8px;
 }
 
 /* Responsive chart */
