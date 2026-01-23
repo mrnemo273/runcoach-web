@@ -1022,11 +1022,12 @@ export default function RunCoach() {
                               </div>
                             )}
                             <div className="race-card-toggle" onClick={(e) => e.stopPropagation()}>
-                              <span className="toggle-label">Active Plan</span>
                               <button
                                 className={`toggle-switch ${selectedRaceId === race.id ? 'on' : ''}`}
                                 onClick={(e) => toggleActivePlan(race.id, e)}
                               >
+                                <span className="toggle-text on-text">ON</span>
+                                <span className="toggle-text off-text">OFF</span>
                                 <span className="toggle-knob"></span>
                               </button>
                             </div>
