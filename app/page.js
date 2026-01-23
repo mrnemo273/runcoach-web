@@ -278,6 +278,17 @@ export default function RunCoach() {
                   <div>
                     <h2 className="card-title">Weekly Mileage</h2>
                     <p className="card-subtitle">Building toward 13.1 miles</p>
+                    {/* Legend */}
+                    <div className="chart-legend">
+                      <div className="legend-item">
+                        <span className="legend-color actual"></span>
+                        <span className="legend-text">ACTUAL</span>
+                      </div>
+                      <div className="legend-item">
+                        <span className="legend-color target"></span>
+                        <span className="legend-text">TARGET</span>
+                      </div>
+                    </div>
                   </div>
                   <div className="progress-ring-wrap">
                     <svg className="progress-ring" width="100" height="100">
@@ -291,18 +302,6 @@ export default function RunCoach() {
                   </div>
                 </div>
                 <div className="chart-container">
-                  {/* Legend */}
-                  <div className="chart-legend">
-                    <div className="legend-item">
-                      <span className="legend-color actual"></span>
-                      <span className="legend-text">ACTUAL</span>
-                    </div>
-                    <div className="legend-item">
-                      <span className="legend-color target"></span>
-                      <span className="legend-text">TARGET</span>
-                    </div>
-                  </div>
-
                   {/* Chart with Y-axis */}
                   <div className="chart-wrapper">
                     <div className="chart-y-axis">
