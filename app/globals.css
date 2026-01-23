@@ -1254,13 +1254,13 @@ header {
 .cal-day {
   background: transparent;
   border-radius: 16px;
-  padding: 12px 14px;
+  padding: 8px 14px 12px 14px;
   min-height: 120px;
   display: flex;
   flex-direction: column;
   position: relative;
   transition: all 0.3s ease;
-  border: 2px solid var(--stone-light);
+  border: 1px solid var(--cream-dark);
 }
 
 .cal-day:hover {
@@ -1289,13 +1289,13 @@ header {
   opacity: 0.7;
 }
 
-/* All day cards use uniform gray border - no colored strokes */
+/* All day cards use uniform subtle border */
 .cal-day-short,
 .cal-day-medium,
 .cal-day-long,
 .cal-day-strength,
 .cal-day-rest {
-  border-color: var(--stone-light);
+  border-color: var(--cream-dark);
 }
 
 /* Today highlight */
