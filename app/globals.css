@@ -180,9 +180,15 @@ header {
 }
 
 /* Fixed hamburger position when menu is open */
+.hamburger.open {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1002;
+}
+
 @media (max-width: 768px) {
   .hamburger.open {
-    position: fixed;
     top: 20px;
     right: 20px;
   }
