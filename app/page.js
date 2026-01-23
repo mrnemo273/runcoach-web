@@ -14,6 +14,7 @@ export default function RunCoach() {
   const [notes, setNotes] = useState('');
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const fileInputRef = useRef(null);
 
   // Race date: March 21, 2026
@@ -229,7 +230,8 @@ export default function RunCoach() {
               <div className="logo-mark">↗</div>
               <div className="logo-text">RUN<span>COACH</span></div>
             </div>
-            <nav>
+            {/* Desktop Navigation */}
+            <nav className="desktop-nav">
               {['dashboard', 'logrun', 'training', 'insights', 'history'].map(tab => (
                 <button
                   key={tab}
@@ -240,8 +242,37 @@ export default function RunCoach() {
                 </button>
               ))}
             </nav>
+            {/* Hamburger Menu Button */}
+            <button
+              className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
         </header>
+
+        {/* Mobile Navigation Overlay */}
+        <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}>
+          <nav className="mobile-nav">
+            {['dashboard', 'logrun', 'training', 'insights', 'history'].map((tab, index) => (
+              <button
+                key={tab}
+                className={`mobile-nav-link ${activeTab === tab ? 'active' : ''}`}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setMobileMenuOpen(false);
+                }}
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                {tab === 'logrun' ? 'LOG RUN' : tab === 'training' ? 'TRAINING PLAN' : tab.toUpperCase()}
+              </button>
+            ))}
+          </nav>
+        </div>
 
         {/* Dashboard Tab */}
         {activeTab === 'dashboard' && (
