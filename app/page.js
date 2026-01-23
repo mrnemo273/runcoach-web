@@ -1257,30 +1257,153 @@ export default function RunCoach() {
             <section className="race-hero animate-in">
               <div className="race-info">
                 <div className="race-label">12-WEEK TRAINING PLAN</div>
-                <h1 className="race-title">Half Marathon Build</h1>
+                <h1 className="race-title">{selectedRace?.name || 'Half Marathon Build'}</h1>
                 <p className="race-meta">Progressive mileage with peak at Week 9</p>
               </div>
             </section>
 
-            <div className="plan-grid animate-in delay-1">
-              {trainingPlan.map((week, i) => (
-                <div key={i} className={`week-row ${week.status}`}>
-                  <div>
-                    <div className="week-num">WEEK {week.week}</div>
-                    <div className="week-phase">{week.phase}</div>
+            {/* Calendar View - Organized by Month */}
+            <div className="cal-months animate-in delay-1">
+              {(() => {
+                // Build all calendar days
+                const raceDay = new Date(selectedRace?.date || '2026-03-15');
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const allDays = [];
+
+                trainingPlan.forEach((week) => {
+                  const weeksBeforeRace = trainingPlan.length - week.week;
+                  const weekStartDate = new Date(raceDay);
+                  weekStartDate.setDate(raceDay.getDate() - (weeksBeforeRace * 7) - raceDay.getDay());
+
+                  const runDays = [2, 4, 6]; // Tue, Thu, Sat
+                  const strengthDays = [1, 3]; // Mon, Wed
+                  const restDays = [0, 5]; // Sun, Fri
+
+                  for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+                    const cellDate = new Date(weekStartDate);
+                    cellDate.setDate(weekStartDate.getDate() + dayOffset);
+
+                    const cellDateClean = new Date(cellDate);
+                    cellDateClean.setHours(0, 0, 0, 0);
+
+                    const runIndex = runDays.indexOf(dayOffset);
+                    const hasRun = runIndex !== -1 && week.runs[runIndex];
+                    const runDistance = hasRun ? week.runs[runIndex] : null;
+                    const isStrengthDay = strengthDays.includes(dayOffset);
+                    const isRestDay = restDays.includes(dayOffset);
+
+                    // Determine run type
+                    let runType = null;
+                    if (runDistance) {
+                      const miles = parseFloat(runDistance);
+                      if (miles <= 4) runType = 'short';
+                      else if (miles <= 7) runType = 'medium';
+                      else runType = 'long';
+                    }
+
+                    const dateStr = cellDate.toISOString().split('T')[0];
+                    const actualRun = runData.find(r => r.date === dateStr);
+                    const isPast = cellDateClean < today;
+
+                    allDays.push({
+                      date: cellDate,
+                      dayOfWeek: dayOffset,
+                      week,
+                      hasRun,
+                      runDistance,
+                      runType,
+                      actualRun,
+                      isStrengthDay,
+                      isRestDay,
+                      isPast,
+                      isRaceDay: cellDate.toDateString() === raceDay.toDateString(),
+                      isToday: cellDate.toDateString() === today.toDateString()
+                    });
+                  }
+                });
+
+                // Group by month
+                const monthGroups = {};
+                allDays.forEach(day => {
+                  const monthKey = `${day.date.getFullYear()}-${day.date.getMonth()}`;
+                  const monthName = day.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                  if (!monthGroups[monthKey]) {
+                    monthGroups[monthKey] = { name: monthName, days: [] };
+                  }
+                  monthGroups[monthKey].days.push(day);
+                });
+
+                // Check if month is complete
+                Object.values(monthGroups).forEach(month => {
+                  month.isComplete = month.days.every(day => day.isPast);
+                });
+
+                return Object.entries(monthGroups).map(([monthKey, month]) => (
+                  <div key={monthKey} className="cal-month-section">
+                    <div className="cal-month-header">
+                      <h3>{month.name} {month.isComplete && <span className="cal-month-complete">🎉 Complete</span>}</h3>
+                    </div>
+
+                    <div className="cal-day-labels">
+                      {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+                        <span key={d} className="cal-day-label">{d}</span>
+                      ))}
+                    </div>
+
+                    <div className="cal-grid">
+                      {/* Empty cells for alignment */}
+                      {month.days[0] && Array(month.days[0].dayOfWeek).fill(null).map((_, i) => (
+                        <div key={`empty-${i}`} className="cal-day cal-day-empty"></div>
+                      ))}
+
+                      {month.days.map((day, i) => (
+                        <div
+                          key={i}
+                          className={`cal-day ${day.isPast ? 'cal-day-past' : ''} ${day.isToday ? 'cal-day-today' : ''} ${day.isRaceDay ? 'cal-day-race' : ''} ${day.hasRun ? `cal-day-run cal-day-${day.runType}` : ''} ${day.isStrengthDay ? 'cal-day-strength' : ''} ${day.isRestDay ? 'cal-day-rest' : ''}`}
+                        >
+                          {/* Top: date + label */}
+                          <div className="cal-day-top">
+                            <span className="cal-day-num">{day.date.getDate()}</span>
+                            <span className="cal-day-type">
+                              {day.isRaceDay ? 'Race' : day.hasRun ? (day.runType === 'short' ? 'Easy' : day.runType === 'medium' ? 'Tempo' : 'Long') : day.isStrengthDay ? 'Strength' : 'Rest'}
+                            </span>
+                          </div>
+
+                          {/* Center: emoji */}
+                          <div className="cal-day-center">
+                            <span className="cal-day-emoji">
+                              {day.isRaceDay ? '🏁' : day.hasRun ? '🏃' : day.isStrengthDay ? '🏋️' : '😴'}
+                            </span>
+                          </div>
+
+                          {/* Bottom: distance + duration */}
+                          <div className="cal-day-bottom">
+                            {day.isRaceDay ? (
+                              <span className="cal-day-distance">{selectedRace?.distanceLabel}</span>
+                            ) : day.hasRun ? (
+                              <>
+                                <span className="cal-day-distance">{day.actualRun ? `${day.actualRun.distance} mi` : day.runDistance}</span>
+                                {day.actualRun && <span className="cal-day-duration">{day.actualRun.duration}</span>}
+                              </>
+                            ) : null}
+                          </div>
+
+                          {day.isToday && <div className="cal-today-badge">TODAY</div>}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="week-runs">
-                    {week.runs.map((run, j) => (
-                      <span key={j} className={`run-tag ${j === week.runs.length - 1 ? 'long' : ''} ${week.status === 'completed' ? 'completed' : ''}`}>
-                        {run}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="week-status">
-                    {week.status === 'completed' ? '✓' : week.status === 'current' ? '→' : '○'}
-                  </div>
-                </div>
-              ))}
+                ));
+              })()}
+            </div>
+
+            {/* Legend */}
+            <div className="cal-legend animate-in delay-2">
+              <div className="cal-legend-item"><span className="cal-legend-dot cal-legend-short"></span><span>Easy (≤4 mi)</span></div>
+              <div className="cal-legend-item"><span className="cal-legend-dot cal-legend-medium"></span><span>Tempo (5-7 mi)</span></div>
+              <div className="cal-legend-item"><span className="cal-legend-dot cal-legend-long"></span><span>Long (8+ mi)</span></div>
+              <div className="cal-legend-item"><span className="cal-legend-dot cal-legend-strength"></span><span>Strength</span></div>
             </div>
           </div>
         )}
