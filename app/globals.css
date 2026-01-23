@@ -1810,10 +1810,6 @@ footer strong {
 }
 
 @media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    gap: 20px;
-  }
   .race-hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
