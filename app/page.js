@@ -572,6 +572,8 @@ export default function RunCoach() {
                 <div className="logrun-grid">
                   {/* Upload Zone */}
                   <div className="upload-zone">
+                    <h3 className="zone-title">Upload Your Files</h3>
+                    <p className="zone-subtitle">Drag and drop or click to select</p>
                     <div
                       className={`upload-dropzone ${uploadedFiles.length > 0 ? 'has-files' : ''}`}
                       onDrop={handleDrop}
@@ -606,15 +608,16 @@ export default function RunCoach() {
                     </div>
 
                     {isExtracting && (
-                      <div className="processing-state" style={{ textAlign: 'center', padding: '24px' }}>
+                      <div className="processing-state">
                         <div className="processing-spinner"></div>
-                        <p style={{ marginTop: '16px', color: 'var(--stone)' }}>Extracting run data...</p>
+                        <p>Extracting run data...</p>
                       </div>
                     )}
 
                     {extractedData && !isExtracting && (
                       <div className="extracted-data visible">
-                        <div className="extracted-header">✓ Data Extracted</div>
+                        <h3 className="zone-title">Extracted Data</h3>
+                        <p className="zone-subtitle">Review your workout details</p>
                         <div className="extracted-grid">
                           <div className="extracted-item">
                             <div className="extracted-value">{extractedData.distance || '--'}</div>

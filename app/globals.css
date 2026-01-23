@@ -1392,8 +1392,22 @@ footer strong {
   box-shadow: var(--shadow-lifted);
 }
 
+/* Zone Headers */
+.zone-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.zone-subtitle {
+  font-size: 14px;
+  color: var(--stone);
+  margin-bottom: 20px;
+}
+
 .upload-dropzone {
-  border: 2px dashed var(--cream-dark);
+  border: 2px dashed var(--stone-light);
   border-radius: 16px;
   padding: 60px 40px;
   text-align: center;
@@ -1414,7 +1428,11 @@ footer strong {
 }
 
 .upload-dropzone.has-files {
-  padding: 30px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
 }
 
 .upload-icon {
@@ -1462,15 +1480,17 @@ footer strong {
 
 /* Preview Thumbnails */
 .preview-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
 }
 
 .preview-thumb {
   position: relative;
-  aspect-ratio: 1;
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
@@ -1507,17 +1527,27 @@ footer strong {
 
 /* Extracted Data Preview */
 .extracted-data {
-  margin-top: 24px;
-  padding: 24px;
-  background: rgba(45, 106, 79, 0.08);
-  border-radius: 12px;
-  border-left: 4px solid var(--forest);
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--cream-dark);
   display: none;
 }
 
 .extracted-data.visible {
   display: block;
   animation: fadeIn 0.5s ease;
+}
+
+/* Processing State */
+.processing-state {
+  text-align: center;
+  padding: 32px;
+  margin-top: 24px;
+}
+
+.processing-state p {
+  margin-top: 16px;
+  color: var(--stone);
 }
 
 .extracted-header {
