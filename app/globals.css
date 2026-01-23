@@ -271,9 +271,24 @@ header {
   .header-inner {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 26px;
+  }
+
+  .logo-mark {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
   }
 
   .container {
@@ -281,7 +296,7 @@ header {
   }
 
   header {
-    padding: 20px 0;
+    padding: 16px 0;
   }
 }
 
