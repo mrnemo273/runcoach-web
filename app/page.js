@@ -700,6 +700,7 @@ export default function RunCoach() {
                             <div key={i} className="preview-thumb">
                               <img src={URL.createObjectURL(file)} alt="" />
                               <button className="remove-btn" onClick={(e) => { e.stopPropagation(); removeFile(i); }}>×</button>
+                              <span className="success-badge">✓</span>
                             </div>
                           ))}
                         </div>
