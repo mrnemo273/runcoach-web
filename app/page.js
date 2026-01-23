@@ -1028,7 +1028,7 @@ export default function RunCoach() {
                               >
                                 <span className="toggle-text on-text">ACTIVE</span>
                                 <span className="toggle-text off-text">INACTIVE</span>
-                                <span className="toggle-knob"></span>
+                                <span className="toggle-knob"><span></span></span>
                               </button>
                             </div>
                           </div>
@@ -1249,7 +1249,7 @@ export default function RunCoach() {
                     >
                       <span className="toggle-text on-text">ACTIVE</span>
                       <span className="toggle-text off-text">INACTIVE</span>
-                      <span className="toggle-knob"></span>
+                      <span className="toggle-knob"><span></span></span>
                     </button>
                   </div>
                 </div>
