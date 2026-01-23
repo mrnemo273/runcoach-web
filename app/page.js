@@ -222,6 +222,36 @@ export default function RunCoach() {
       {/* Topographic Background */}
       <div className="topo-bg"></div>
 
+      {/* Hamburger Menu Button - Outside container for proper z-index */}
+      <button
+        className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {/* Mobile Navigation Overlay */}
+      <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}>
+        <nav className="mobile-nav">
+          {['dashboard', 'logrun', 'training', 'insights', 'history'].map((tab, index) => (
+            <button
+              key={tab}
+              className={`mobile-nav-link ${activeTab === tab ? 'active' : ''}`}
+              onClick={() => {
+                setActiveTab(tab);
+                setMobileMenuOpen(false);
+              }}
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              {tab === 'logrun' ? 'LOG RUN' : tab === 'training' ? 'TRAINING PLAN' : tab.toUpperCase()}
+            </button>
+          ))}
+        </nav>
+      </div>
+
       <div className="container">
         {/* Header */}
         <header className="animate-in">
@@ -242,37 +272,10 @@ export default function RunCoach() {
                 </button>
               ))}
             </nav>
-            {/* Hamburger Menu Button */}
-            <button
-              className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+            {/* Hamburger placeholder for layout */}
+            <div className="hamburger-placeholder"></div>
           </div>
         </header>
-
-        {/* Mobile Navigation Overlay */}
-        <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}>
-          <nav className="mobile-nav">
-            {['dashboard', 'logrun', 'training', 'insights', 'history'].map((tab, index) => (
-              <button
-                key={tab}
-                className={`mobile-nav-link ${activeTab === tab ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveTab(tab);
-                  setMobileMenuOpen(false);
-                }}
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                {tab === 'logrun' ? 'LOG RUN' : tab === 'training' ? 'TRAINING PLAN' : tab.toUpperCase()}
-              </button>
-            ))}
-          </nav>
-        </div>
 
         {/* Dashboard Tab */}
         {activeTab === 'dashboard' && (

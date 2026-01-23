@@ -154,6 +154,9 @@ header {
   cursor: pointer;
   z-index: 1001;
   gap: 6px;
+  position: fixed;
+  top: 28px;
+  right: 32px;
 }
 
 .hamburger span {
@@ -179,18 +182,22 @@ header {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Fixed hamburger position when menu is open */
-.hamburger.open {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 1002;
+/* Placeholder to maintain header layout on mobile */
+.hamburger-placeholder {
+  display: none;
+  width: 44px;
+  height: 44px;
 }
 
 @media (max-width: 768px) {
-  .hamburger.open {
+  .hamburger {
+    display: flex;
     top: 20px;
     right: 20px;
+  }
+
+  .hamburger-placeholder {
+    display: block;
   }
 }
 
@@ -277,10 +284,6 @@ header {
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
-  }
-
-  .hamburger {
-    display: flex;
   }
 
   .header-inner {
