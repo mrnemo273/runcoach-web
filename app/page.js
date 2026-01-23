@@ -226,15 +226,33 @@ export default function RunCoach() {
                 <div className="countdown-container">
                   <div className="countdown">
                     <div className="countdown-block">
-                      <div className="countdown-value">{countdown.days}</div>
+                      <div className="flip-clock">
+                        {String(countdown.days).padStart(2, '0').split('').map((digit, i) => (
+                          <div key={i} className="flip-digit" style={{ animationDelay: `${i * 0.1}s` }}>
+                            <span>{digit}</span>
+                          </div>
+                        ))}
+                      </div>
                       <div className="countdown-label">DAYS</div>
                     </div>
                     <div className="countdown-block">
-                      <div className="countdown-value">{countdown.hours}</div>
+                      <div className="flip-clock">
+                        {String(countdown.hours).padStart(2, '0').split('').map((digit, i) => (
+                          <div key={i} className="flip-digit" style={{ animationDelay: `${0.2 + i * 0.1}s` }}>
+                            <span>{digit}</span>
+                          </div>
+                        ))}
+                      </div>
                       <div className="countdown-label">HOURS</div>
                     </div>
                     <div className="countdown-block">
-                      <div className="countdown-value">{countdown.minutes}</div>
+                      <div className="flip-clock">
+                        {String(countdown.minutes).padStart(2, '0').split('').map((digit, i) => (
+                          <div key={i} className="flip-digit" style={{ animationDelay: `${0.4 + i * 0.1}s` }}>
+                            <span>{digit}</span>
+                          </div>
+                        ))}
+                      </div>
                       <div className="countdown-label">MIN</div>
                     </div>
                   </div>
