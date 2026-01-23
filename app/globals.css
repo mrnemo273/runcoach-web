@@ -232,109 +232,164 @@ nav {
   margin-top: 12px;
 }
 
-/* Flip Clock Styles */
+/* Flip Clock Styles - Split Flap Display */
 .flip-clock {
   display: flex;
-  gap: 4px;
-  perspective: 400px;
+  gap: 6px;
+  perspective: 300px;
 }
 
-.flip-digit {
-  width: 44px;
-  height: 64px;
+.flip-card {
+  width: 48px;
+  height: 72px;
+  position: relative;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Static top half showing current digit */
+.card-top,
+.card-bottom {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
   background: var(--white);
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 2px 8px rgba(29, 29, 29, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(29, 29, 29, 0.05);
-  position: relative;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  opacity: 1;
-  transform: rotateX(0deg);
 }
 
-/* Initial load animation */
-.flip-digit.initial {
-  opacity: 0;
-  transform: rotateX(-180deg);
-  animation: flipInInitial 0.8s cubic-bezier(0.35, 0, 0.25, 1) forwards;
-}
-
-/* Real-time flip animation */
-.flip-digit.flipping {
-  animation: flipChange 0.5s cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-.flip-digit::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(29, 29, 29, 0.1);
-  z-index: 2;
-}
-
-.flip-digit::after {
-  content: '';
-  position: absolute;
+.card-top {
   top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
-  border-radius: 8px 8px 0 0;
-  pointer-events: none;
-  z-index: 1;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid rgba(29, 29, 29, 0.12);
+  box-shadow: inset 0 -1px 1px rgba(29, 29, 29, 0.05);
 }
 
-.flip-digit span {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 48px;
-  line-height: 1;
-  color: var(--charcoal);
-  font-weight: 400;
+.card-top span {
+  transform: translateY(50%);
+}
+
+.card-bottom {
+  bottom: 0;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 2px 4px rgba(29, 29, 29, 0.1);
+}
+
+.card-bottom span {
+  transform: translateY(-50%);
+}
+
+/* Flipping parts */
+.card-flip-top,
+.card-flip-bottom {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   backface-visibility: hidden;
 }
 
-/* Initial load - dramatic entrance with multiple flips */
-@keyframes flipInInitial {
-  0% {
-    opacity: 0;
-    transform: rotateX(-180deg) scale(0.8);
-  }
-  20% {
-    opacity: 1;
-    transform: rotateX(-120deg) scale(0.9);
-  }
-  40% {
-    transform: rotateX(-60deg) scale(0.95);
-  }
-  60% {
-    transform: rotateX(20deg) scale(1.02);
-  }
-  80% {
-    transform: rotateX(-10deg) scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: rotateX(0deg) scale(1);
-  }
+.card-flip-top {
+  top: 0;
+  border-radius: 6px 6px 0 0;
+  transform-origin: bottom center;
+  transform: rotateX(0deg);
+  z-index: 3;
+  border-bottom: 1px solid rgba(29, 29, 29, 0.12);
 }
 
-/* Real-time digit change flip */
-@keyframes flipChange {
+.card-flip-top span {
+  transform: translateY(50%);
+}
+
+.card-flip-bottom {
+  bottom: 0;
+  border-radius: 0 0 6px 6px;
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  z-index: 2;
+}
+
+.card-flip-bottom span {
+  transform: translateY(-50%);
+}
+
+/* Shared text styling */
+.card-top span,
+.card-bottom span,
+.card-flip-top span,
+.card-flip-bottom span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--charcoal);
+  font-weight: 400;
+}
+
+/* Initial load animation */
+.flip-card.initial .card-flip-top {
+  animation: flipTopInitial 0.5s ease-out forwards;
+}
+
+.flip-card.initial .card-flip-bottom {
+  animation: flipBottomInitial 0.5s ease-out forwards;
+  animation-delay: 0.25s;
+}
+
+/* Real-time flip animation */
+.flip-card.flipping .card-flip-top {
+  animation: flipTopDown 0.35s ease-in forwards;
+}
+
+.flip-card.flipping .card-flip-bottom {
+  animation: flipBottomUp 0.35s ease-out forwards;
+  animation-delay: 0.18s;
+}
+
+/* Initial entrance - top flips down */
+@keyframes flipTopInitial {
   0% {
     transform: rotateX(0deg);
   }
-  50% {
+  100% {
     transform: rotateX(-90deg);
+  }
+}
+
+/* Initial entrance - bottom flips up to reveal */
+@keyframes flipBottomInitial {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* Real-time - top flips down */
+@keyframes flipTopDown {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+/* Real-time - bottom flips up */
+@keyframes flipBottomUp {
+  0% {
+    transform: rotateX(90deg);
   }
   100% {
     transform: rotateX(0deg);

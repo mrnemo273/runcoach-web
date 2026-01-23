@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from 'react';
 
 export default function RunCoach() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [prevCountdown, setPrevCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [flipping, setFlipping] = useState({ days: [false, false], hours: [false, false], minutes: [false, false], seconds: [false, false] });
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0 });
+  const [prevCountdown, setPrevCountdown] = useState({ days: 0, hours: 0, minutes: 0 });
+  const [flipping, setFlipping] = useState({ days: [false, false], hours: [false, false], minutes: [false, false] });
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [extractedData, setExtractedData] = useState(null);
@@ -95,7 +95,7 @@ export default function RunCoach() {
     { label: 'W2 JAN', actual: 8.5, target: 20 },
   ];
 
-  // Countdown timer with flip animation
+  // Countdown timer with flip animation (updates every minute to save CPU)
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date();
@@ -104,15 +104,14 @@ export default function RunCoach() {
         const newCountdown = {
           days: Math.floor(diff / (1000 * 60 * 60 * 24)),
           hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((diff % (1000 * 60)) / 1000)
+          minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
         };
 
         // Check which digits changed and trigger flip animation
         if (!isInitialLoad) {
-          const newFlipping = { days: [false, false], hours: [false, false], minutes: [false, false], seconds: [false, false] };
+          const newFlipping = { days: [false, false], hours: [false, false], minutes: [false, false] };
 
-          ['days', 'hours', 'minutes', 'seconds'].forEach(unit => {
+          ['days', 'hours', 'minutes'].forEach(unit => {
             const oldStr = String(prevCountdown[unit]).padStart(2, '0');
             const newStr = String(newCountdown[unit]).padStart(2, '0');
             if (oldStr[0] !== newStr[0]) newFlipping[unit][0] = true;
@@ -123,8 +122,8 @@ export default function RunCoach() {
 
           // Reset flipping state after animation
           setTimeout(() => {
-            setFlipping({ days: [false, false], hours: [false, false], minutes: [false, false], seconds: [false, false] });
-          }, 600);
+            setFlipping({ days: [false, false], hours: [false, false], minutes: [false, false] });
+          }, 800);
         }
 
         setPrevCountdown(countdown);
@@ -133,11 +132,12 @@ export default function RunCoach() {
     };
 
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
+    // Update every minute instead of every second
+    const interval = setInterval(updateCountdown, 60000);
 
     // End initial load animation after a delay
     if (isInitialLoad) {
-      setTimeout(() => setIsInitialLoad(false), 2000);
+      setTimeout(() => setIsInitialLoad(false), 2500);
     }
 
     return () => clearInterval(interval);
@@ -260,59 +260,93 @@ export default function RunCoach() {
                   <div className="countdown">
                     <div className="countdown-block">
                       <div className="flip-clock">
-                        {String(countdown.days).padStart(2, '0').split('').map((digit, i) => (
-                          <div
-                            key={`days-${i}`}
-                            className={`flip-digit ${isInitialLoad ? 'initial' : ''} ${flipping.days[i] ? 'flipping' : ''}`}
-                            style={{ animationDelay: isInitialLoad ? `${i * 0.15}s` : '0s' }}
-                          >
-                            <span>{digit}</span>
-                          </div>
-                        ))}
+                        {String(countdown.days).padStart(2, '0').split('').map((digit, i) => {
+                          const prevDigit = String(prevCountdown.days).padStart(2, '0')[i];
+                          return (
+                            <div
+                              key={`days-${i}`}
+                              className={`flip-card ${isInitialLoad ? 'initial' : ''} ${flipping.days[i] ? 'flipping' : ''}`}
+                              style={{ animationDelay: isInitialLoad ? `${i * 0.12}s` : '0s' }}
+                            >
+                              <div className="flip-card-inner">
+                                <div className="card-top">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-flip-top">
+                                  <span>{prevDigit}</span>
+                                </div>
+                                <div className="card-flip-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                       <div className="countdown-label">DAYS</div>
                     </div>
                     <div className="countdown-block">
                       <div className="flip-clock">
-                        {String(countdown.hours).padStart(2, '0').split('').map((digit, i) => (
-                          <div
-                            key={`hours-${i}`}
-                            className={`flip-digit ${isInitialLoad ? 'initial' : ''} ${flipping.hours[i] ? 'flipping' : ''}`}
-                            style={{ animationDelay: isInitialLoad ? `${0.3 + i * 0.15}s` : '0s' }}
-                          >
-                            <span>{digit}</span>
-                          </div>
-                        ))}
+                        {String(countdown.hours).padStart(2, '0').split('').map((digit, i) => {
+                          const prevDigit = String(prevCountdown.hours).padStart(2, '0')[i];
+                          return (
+                            <div
+                              key={`hours-${i}`}
+                              className={`flip-card ${isInitialLoad ? 'initial' : ''} ${flipping.hours[i] ? 'flipping' : ''}`}
+                              style={{ animationDelay: isInitialLoad ? `${0.24 + i * 0.12}s` : '0s' }}
+                            >
+                              <div className="flip-card-inner">
+                                <div className="card-top">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-flip-top">
+                                  <span>{prevDigit}</span>
+                                </div>
+                                <div className="card-flip-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                       <div className="countdown-label">HOURS</div>
                     </div>
                     <div className="countdown-block">
                       <div className="flip-clock">
-                        {String(countdown.minutes).padStart(2, '0').split('').map((digit, i) => (
-                          <div
-                            key={`mins-${i}`}
-                            className={`flip-digit ${isInitialLoad ? 'initial' : ''} ${flipping.minutes[i] ? 'flipping' : ''}`}
-                            style={{ animationDelay: isInitialLoad ? `${0.6 + i * 0.15}s` : '0s' }}
-                          >
-                            <span>{digit}</span>
-                          </div>
-                        ))}
+                        {String(countdown.minutes).padStart(2, '0').split('').map((digit, i) => {
+                          const prevDigit = String(prevCountdown.minutes).padStart(2, '0')[i];
+                          return (
+                            <div
+                              key={`mins-${i}`}
+                              className={`flip-card ${isInitialLoad ? 'initial' : ''} ${flipping.minutes[i] ? 'flipping' : ''}`}
+                              style={{ animationDelay: isInitialLoad ? `${0.48 + i * 0.12}s` : '0s' }}
+                            >
+                              <div className="flip-card-inner">
+                                <div className="card-top">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                                <div className="card-flip-top">
+                                  <span>{prevDigit}</span>
+                                </div>
+                                <div className="card-flip-bottom">
+                                  <span>{digit}</span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                       <div className="countdown-label">MIN</div>
-                    </div>
-                    <div className="countdown-block">
-                      <div className="flip-clock">
-                        {String(countdown.seconds).padStart(2, '0').split('').map((digit, i) => (
-                          <div
-                            key={`secs-${i}`}
-                            className={`flip-digit ${isInitialLoad ? 'initial' : ''} ${flipping.seconds[i] ? 'flipping' : ''}`}
-                            style={{ animationDelay: isInitialLoad ? `${0.9 + i * 0.15}s` : '0s' }}
-                          >
-                            <span>{digit}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="countdown-label">SEC</div>
                     </div>
                   </div>
                 </div>
