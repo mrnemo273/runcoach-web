@@ -141,7 +141,7 @@ nav {
 
 /* Hero Race Banner */
 .race-hero {
-  padding: 64px 0 48px;
+  padding: 48px 0 32px;
   position: relative;
 }
 
@@ -238,7 +238,7 @@ nav {
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--cream-dark);
-  margin: 48px 0;
+  margin: 32px 0;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
@@ -311,7 +311,7 @@ nav {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 32px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
   align-items: stretch;
 }
 
@@ -664,7 +664,7 @@ nav {
 
 /* Milestones Section */
 .milestones-section {
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .section-header {
@@ -751,7 +751,7 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .insight-card {
