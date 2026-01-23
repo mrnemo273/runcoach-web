@@ -1560,34 +1560,21 @@ footer strong {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  margin-top: 16px;
-  border-radius: 10px;
-  background: var(--cream-dark);
-  transition: background 0.3s ease;
-}
-
-.race-card-toggle.active {
-  background: rgba(45, 106, 79, 0.12);
+  margin-top: 12px;
 }
 
 .toggle-label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--stone);
-  font-weight: 500;
-}
-
-.race-card-toggle.active .toggle-label {
-  color: var(--forest-green);
 }
 
 .toggle-switch {
   position: relative;
-  width: 44px;
-  height: 24px;
+  width: 40px;
+  height: 22px;
   background: var(--stone-light);
   border: none;
-  border-radius: 12px;
+  border-radius: 11px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -1600,16 +1587,16 @@ footer strong {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: var(--white);
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   transition: transform 0.3s ease;
 }
 
 .toggle-switch.on .toggle-knob {
-  transform: translateX(20px);
+  transform: translateX(18px);
 }
 
 .toggle-switch.large {
