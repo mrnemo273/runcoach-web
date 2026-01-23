@@ -1026,7 +1026,9 @@ export default function RunCoach() {
                                 className={`toggle-switch ${selectedRaceId === race.id ? 'on' : ''}`}
                                 onClick={(e) => toggleActivePlan(race.id, e)}
                               >
-                                <span className="toggle-text">{selectedRaceId === race.id ? 'ACTIVE' : 'INACTIVE'}</span>
+                                <span className="toggle-text on-text">ACTIVE</span>
+                                <span className="toggle-text off-text">INACTIVE</span>
+                                <span className="toggle-knob"></span>
                               </button>
                             </div>
                           </div>
@@ -1245,7 +1247,9 @@ export default function RunCoach() {
                       className={`toggle-switch large ${selectedRaceId === detailRace.id ? 'on' : ''}`}
                       onClick={(e) => toggleActivePlan(detailRace.id, e)}
                     >
-                      <span className="toggle-text">{selectedRaceId === detailRace.id ? 'ACTIVE' : 'INACTIVE'}</span>
+                      <span className="toggle-text on-text">ACTIVE</span>
+                      <span className="toggle-text off-text">INACTIVE</span>
+                      <span className="toggle-knob"></span>
                     </button>
                   </div>
                 </div>
