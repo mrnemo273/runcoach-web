@@ -1644,8 +1644,8 @@ footer strong {
 }
 
 .feeling-option.selected {
-  border-color: var(--burnt-orange);
-  background: rgba(232, 93, 4, 0.08);
+  border-color: var(--charcoal);
+  background: rgba(29, 29, 29, 0.08);
 }
 
 .feeling-emoji {
@@ -1662,7 +1662,7 @@ footer strong {
 }
 
 .feeling-option.selected .feeling-text {
-  color: var(--burnt-orange);
+  color: var(--charcoal);
   font-weight: 600;
 }
 
@@ -1697,7 +1697,7 @@ footer strong {
 
 .notes-textarea:focus {
   outline: none;
-  border-color: var(--burnt-orange);
+  border-color: var(--charcoal);
   background: var(--white);
 }
 
