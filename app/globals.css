@@ -103,9 +103,9 @@ header {
 }
 
 .nav-link {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Google Sans Code', monospace;
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 500;
   letter-spacing: 1.5px;
   padding: 12px 20px;
   border: none;
@@ -232,9 +232,9 @@ header {
 }
 
 .mobile-nav-link {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Google Sans Code', monospace;
   font-size: 32px;
-  font-weight: 900;
+  font-weight: 500;
   letter-spacing: 3px;
   padding: 16px 32px;
   border: none;
