@@ -547,7 +547,15 @@ export default function RunCoach() {
         {/* Log Run Tab */}
         {activeTab === 'logrun' && (
           <div className="tab-content active">
-            <div className="logrun-container">
+            <section className="race-hero animate-in">
+              <div className="race-info">
+                <div className="race-label">CAPTURE YOUR WORKOUT</div>
+                <h1 className="race-title">Log Run</h1>
+                <p className="race-meta">Upload your Apple Watch screenshots to automatically extract run data</p>
+              </div>
+            </section>
+
+            <div className="logrun-container animate-in delay-1">
               {!saveSuccess ? (
                 <div className="logrun-grid">
                   {/* Upload Zone */}
