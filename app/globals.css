@@ -105,6 +105,7 @@ header {
 .nav-link {
   font-family: 'Inter Tight', sans-serif;
   font-size: 15px;
+  font-weight: 900;
   letter-spacing: 1.5px;
   padding: 12px 20px;
   border: none;
@@ -233,6 +234,7 @@ header {
 .mobile-nav-link {
   font-family: 'Inter Tight', sans-serif;
   font-size: 32px;
+  font-weight: 900;
   letter-spacing: 3px;
   padding: 16px 32px;
   border: none;
