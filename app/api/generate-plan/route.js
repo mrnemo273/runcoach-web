@@ -70,7 +70,8 @@ Return your response as JSON in this exact format:
     "courseInfo": "Brief course description (flat, hilly, etc.)",
     "elevation": "Total elevation gain",
     "website": "Official website URL if known, or null",
-    "goalTime": "Suggested goal time in H:MM:SS format"
+    "goalTime": "Suggested goal time in H:MM:SS format",
+    "imageSearch": "A short search query to find an iconic image of this race or its location (e.g., 'Boston Marathon finish line Boylston Street' or 'Cherry Blossom Washington DC Tidal Basin')"
   },
   "trainingPlan": [
     {
@@ -113,9 +114,51 @@ Return ONLY valid JSON, no other text.`;
       parsedResponse = generateDefaultPlan(weeksUntilRace, targetDistance, distanceName, raceName);
     }
 
+    // Add a default image based on location or race type
+    const raceInfo = parsedResponse.raceInfo || {};
+    if (!raceInfo.image) {
+      // Use Unsplash for generic running/city images based on location
+      const locationImages = {
+        'boston': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+        'new york': 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80',
+        'chicago': 'https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=800&q=80',
+        'london': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80',
+        'berlin': 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=800&q=80',
+        'tokyo': 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80',
+        'san francisco': 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80',
+        'los angeles': 'https://images.unsplash.com/photo-1534190760961-74e8c1c5c3da?w=800&q=80',
+        'washington': 'https://images.unsplash.com/photo-1617581629397-a72507c3de9e?w=800&q=80',
+        'miami': 'https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=800&q=80',
+        'seattle': 'https://images.unsplash.com/photo-1502175353174-a7a70e73b362?w=800&q=80',
+        'denver': 'https://images.unsplash.com/photo-1619856699906-09e1f58c98b1?w=800&q=80',
+        'austin': 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=800&q=80',
+        'philadelphia': 'https://images.unsplash.com/photo-1569761316261-9a8696fa2ca3?w=800&q=80',
+      };
+
+      // Default running images by distance
+      const defaultImages = {
+        '5k': 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80',
+        '10k': 'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800&q=80',
+        'half': 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?w=800&q=80',
+        'marathon': 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=80',
+      };
+
+      const location = (raceInfo.location || '').toLowerCase();
+      let foundImage = null;
+
+      for (const [city, url] of Object.entries(locationImages)) {
+        if (location.includes(city)) {
+          foundImage = url;
+          break;
+        }
+      }
+
+      raceInfo.image = foundImage || defaultImages[distance] || 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80';
+    }
+
     return NextResponse.json({
       success: true,
-      raceInfo: parsedResponse.raceInfo,
+      raceInfo: raceInfo,
       trainingPlan: parsedResponse.trainingPlan
     });
 

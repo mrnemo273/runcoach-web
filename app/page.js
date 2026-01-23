@@ -38,6 +38,7 @@ export default function RunCoach() {
       courseInfo: 'Flat, fast course through the National Mall and Tidal Basin',
       elevation: '150 ft gain',
       website: 'https://www.runrocknroll.com/dc',
+      image: 'https://images.unsplash.com/photo-1617581629397-a72507c3de9e?w=800&q=80',
       trainingPlan: [
         { week: 1, phase: 'Base', runs: ['3 mi', '4 mi', '5 mi'], status: 'completed' },
         { week: 2, phase: 'Base', runs: ['3 mi', '4 mi', '6 mi'], status: 'completed' },
@@ -395,6 +396,7 @@ export default function RunCoach() {
           courseInfo: result.raceInfo?.courseInfo || '',
           elevation: result.raceInfo?.elevation || '',
           website: result.raceInfo?.website || '',
+          image: result.raceInfo?.image || null,
           trainingPlan: result.trainingPlan || []
         };
 
@@ -950,32 +952,40 @@ export default function RunCoach() {
                       return (
                         <div
                           key={race.id}
-                          className={`race-card ${selectedRaceId === race.id ? 'selected' : ''}`}
+                          className={`race-card has-image ${selectedRaceId === race.id ? 'selected' : ''}`}
                           onClick={() => setSelectedRaceId(race.id)}
                         >
-                          <div className="race-card-header">
-                            <span className="race-card-distance">{race.distanceLabel}</span>
-                            <span className="race-card-countdown">{daysUntil} days</span>
-                          </div>
-                          <h3 className="race-card-name">{race.name}</h3>
-                          <div className="race-card-details">
-                            <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                            <span className="race-card-location">📍 {race.location}</span>
-                          </div>
-                          {race.goalTime && (
-                            <div className="race-card-goal">
-                              <span className="goal-label">Goal Time</span>
-                              <span className="goal-time">{race.goalTime}</span>
+                          {race.image && (
+                            <div className="race-card-image">
+                              <img src={race.image} alt={race.name} />
+                              <div className="race-card-image-overlay"></div>
                             </div>
                           )}
-                          {selectedRaceId === race.id && (
-                            <div className="race-card-active">
-                              <span>✓ Active Training Plan</span>
+                          <div className="race-card-content">
+                            <div className="race-card-header">
+                              <span className="race-card-distance">{race.distanceLabel}</span>
+                              <span className="race-card-countdown">{daysUntil} days</span>
                             </div>
-                          )}
-                          {race.courseInfo && (
-                            <p className="race-card-course">{race.courseInfo}</p>
-                          )}
+                            <h3 className="race-card-name">{race.name}</h3>
+                            <div className="race-card-details">
+                              <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                              <span className="race-card-location">📍 {race.location}</span>
+                            </div>
+                            {race.goalTime && (
+                              <div className="race-card-goal">
+                                <span className="goal-label">Goal Time</span>
+                                <span className="goal-time">{race.goalTime}</span>
+                              </div>
+                            )}
+                            {selectedRaceId === race.id && (
+                              <div className="race-card-active">
+                                <span>✓ Active Training Plan</span>
+                              </div>
+                            )}
+                            {race.courseInfo && (
+                              <p className="race-card-course">{race.courseInfo}</p>
+                            )}
+                          </div>
                         </div>
                       );
                     })}
@@ -989,22 +999,30 @@ export default function RunCoach() {
                   <h2 className="races-section-title">🏅 Completed Races</h2>
                   <div className="races-grid">
                     {races.filter(r => r.status === 'completed').map(race => (
-                      <div key={race.id} className="race-card completed">
-                        <div className="race-card-header">
-                          <span className="race-card-distance">{race.distanceLabel}</span>
-                          <span className="race-card-finish">✓ Finished</span>
-                        </div>
-                        <h3 className="race-card-name">{race.name}</h3>
-                        <div className="race-card-details">
-                          <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                          <span className="race-card-location">📍 {race.location}</span>
-                        </div>
-                        {race.actualTime && (
-                          <div className="race-card-result">
-                            <span className="result-label">Finish Time</span>
-                            <span className="result-time">{race.actualTime}</span>
+                      <div key={race.id} className={`race-card completed ${race.image ? 'has-image' : ''}`}>
+                        {race.image && (
+                          <div className="race-card-image">
+                            <img src={race.image} alt={race.name} />
+                            <div className="race-card-image-overlay"></div>
                           </div>
                         )}
+                        <div className="race-card-content">
+                          <div className="race-card-header">
+                            <span className="race-card-distance">{race.distanceLabel}</span>
+                            <span className="race-card-finish">✓ Finished</span>
+                          </div>
+                          <h3 className="race-card-name">{race.name}</h3>
+                          <div className="race-card-details">
+                            <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                            <span className="race-card-location">📍 {race.location}</span>
+                          </div>
+                          {race.actualTime && (
+                            <div className="race-card-result">
+                              <span className="result-label">Finish Time</span>
+                              <span className="result-time">{race.actualTime}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
