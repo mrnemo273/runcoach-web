@@ -369,7 +369,7 @@ header {
 
 .race-meta strong {
   color: var(--charcoal);
-  font-weight: 100;
+  font-weight: 900;
 }
 
 .countdown-container {
@@ -665,7 +665,7 @@ header {
 .stat-trend {
   display: inline-block;
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 900;
   padding: 4px 12px;
   border-radius: 20px;
   margin-top: 12px;
@@ -1117,7 +1117,7 @@ header {
 
 .milestone-date {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 900;
   color: var(--forest);
   margin-top: 12px;
 }
@@ -1223,7 +1223,7 @@ header {
 .cal-month-complete {
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 900;
   color: var(--forest);
   letter-spacing: 0;
 }
@@ -1238,7 +1238,7 @@ header {
 .cal-day-label {
   text-align: center;
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--stone);
@@ -1310,7 +1310,7 @@ header {
   background: var(--burnt-orange);
   color: var(--white);
   font-size: 9px;
-  font-weight: 100;
+  font-weight: 900;
   padding: 4px 8px;
   border-radius: 8px;
   text-transform: uppercase;
@@ -1351,7 +1351,7 @@ header {
 
 .cal-day-type {
   font-size: 10px;
-  font-weight: 100;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--stone);
@@ -1502,7 +1502,7 @@ header {
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 900;
   background: var(--cream);
   color: var(--charcoal);
 }
@@ -1793,7 +1793,7 @@ footer strong {
 .race-card-active-badge {
   font-size: 13px;
   color: var(--forest);
-  font-weight: 100;
+  font-weight: 900;
   margin-top: 4px;
 }
 
@@ -1850,7 +1850,7 @@ footer strong {
 .toggle-text {
   position: absolute;
   font-size: 10px;
-  font-weight: 100;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   top: 50%;
@@ -2075,7 +2075,7 @@ footer strong {
 
 .status-label {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--charcoal);
@@ -2112,7 +2112,7 @@ footer strong {
   display: block;
   font-size: 14px;
   color: var(--charcoal);
-  font-weight: 100;
+  font-weight: 900;
 }
 
 .sheet-section {
@@ -2194,7 +2194,7 @@ footer strong {
 .sheet-link {
   display: inline-block;
   color: var(--forest-green);
-  font-weight: 100;
+  font-weight: 900;
   font-size: 14px;
   text-decoration: none;
   margin-bottom: 24px;
@@ -2826,7 +2826,7 @@ footer strong {
 
 .feeling-option.selected .feeling-text {
   color: var(--charcoal);
-  font-weight: 100;
+  font-weight: 900;
 }
 
 /* Notes Section */
