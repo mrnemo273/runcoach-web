@@ -15,8 +15,9 @@ export default function RunCoach() {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [toast, setToast] = useState({ visible: false, message: '', insight: '' });
   const fileInputRef = useRef(null);
-
+  
   // Race date: March 21, 2026
   const raceDate = new Date('2026-03-21T07:00:00');
 
@@ -203,10 +204,117 @@ export default function RunCoach() {
     }
   };
 
+  // Generate motivating insight based on the run data
+  const generateInsight = () => {
+    const insights = [];
+
+    if (extractedData) {
+      const distance = parseFloat(extractedData.distance);
+      const pace = extractedData.pace;
+
+      // Distance-based insights
+      if (distance >= 10) {
+        insights.push("Double digits! You're building serious endurance. 💪");
+        insights.push("10+ miles in the bank! Your half marathon is going to feel amazing.");
+      } else if (distance >= 6) {
+        insights.push("Great long run! Every mile is making you stronger.");
+        insights.push("Solid distance today. Your aerobic base is growing!");
+      } else if (distance >= 4) {
+        insights.push("Perfect training run. Consistency is your superpower!");
+        insights.push("Another quality session logged. Keep stacking those miles!");
+      } else {
+        insights.push("Every mile counts! Recovery runs build champions.");
+        insights.push("Nice easy run. These are the foundation of your training.");
+      }
+
+      // Pace insights
+      if (pace) {
+        const paceMin = parseInt(pace.split(':')[0]);
+        if (paceMin <= 10) {
+          insights.push("Speedy! You're flying out there! 🚀");
+        } else if (paceMin <= 12) {
+          insights.push("Strong pace! You're getting faster every week.");
+        }
+      }
+    }
+
+    // Feeling-based insights
+    if (feelings.mood === 'great') {
+      insights.push("Love that positive energy! Running is your happy place. 🌟");
+    }
+    if (feelings.energy === 'strong') {
+      insights.push("Feeling strong is a sign your training is working!");
+    }
+
+    // Default insights
+    if (insights.length === 0) {
+      insights.push("Another run in the books! You're one step closer to race day.");
+      insights.push("Consistency wins races. You showed up today!");
+      insights.push("Your future self will thank you for this run.");
+    }
+
+    return insights[Math.floor(Math.random() * insights.length)];
+  };
+
+  // Play success sound using Web Audio API
+  const playSuccessSound = () => {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Create a pleasant "ding" sound with harmonics
+      const playTone = (frequency, startTime, duration, gain) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = frequency;
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(gain, startTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+        oscillator.start(startTime);
+        oscillator.stop(startTime + duration);
+      };
+
+      const now = audioContext.currentTime;
+
+      // Pleasant rising chord: C5, E5, G5 (major chord)
+      playTone(523.25, now, 0.3, 0.15);        // C5
+      playTone(659.25, now + 0.08, 0.3, 0.12); // E5
+      playTone(783.99, now + 0.16, 0.4, 0.15); // G5
+      playTone(1046.50, now + 0.24, 0.5, 0.1); // C6 (octave higher for sparkle)
+
+    } catch (e) {
+      // Audio not supported, fail silently
+    }
+  };
+
+  // Show toast notification
+  const showToast = (message, insight) => {
+    setToast({ visible: true, message, insight });
+    playSuccessSound();
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      setToast({ visible: false, message: '', insight: '' });
+    }, 5000);
+  };
+
   const handleSave = async () => {
     setIsSaving(true);
     await new Promise(resolve => setTimeout(resolve, 1500));
-    setSaveSuccess(true);
+
+    const insight = generateInsight();
+    showToast('Run logged successfully!', insight);
+
+    // Reset the form after a brief delay
+    setTimeout(() => {
+      resetLogRun();
+    }, 500);
+
     setIsSaving(false);
   };
 
@@ -568,7 +676,6 @@ export default function RunCoach() {
             </section>
 
             <div className="logrun-container animate-in delay-1">
-              {!saveSuccess ? (
                 <div className="logrun-grid">
                   {/* Upload Zone */}
                   <div className="upload-zone">
@@ -728,14 +835,6 @@ export default function RunCoach() {
                     </div>
                   </div>
                 </div>
-              ) : (
-                <div className="success-message visible">
-                  <div className="success-icon">✅</div>
-                  <h3 className="success-title">Run Logged Successfully!</h3>
-                  <p className="success-text">Your run has been added to your training history.</p>
-                  <button className="log-another-btn" onClick={resetLogRun}>LOG ANOTHER RUN</button>
-                </div>
-              )}
             </div>
           </div>
         )}
@@ -870,6 +969,17 @@ export default function RunCoach() {
           <p>Built with ❤️ for your <strong>DC Half Marathon</strong> journey</p>
         </footer>
       </div>
-    </>
+
+      {/* Toast Notification */}
+      <div className={`toast ${toast.visible ? 'visible' : ''}`}>
+        <div className="toast-icon">✓</div>
+        <div className="toast-content">
+          <div className="toast-title">{toast.message}</div>
+          <div className="toast-insight">{toast.insight}</div>
+        </div>
+        <button className="toast-close" onClick={() => setToast({ visible: false, message: '', insight: '' })}>×</button>
+      </div>
+
+          </>
   );
 }
