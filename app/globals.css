@@ -86,8 +86,9 @@ header {
 }
 
 .logo-text {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Google Sans Code', monospace;
   font-size: 32px;
+  font-weight: 500;
   letter-spacing: 2px;
   color: var(--charcoal);
 }
