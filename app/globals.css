@@ -746,12 +746,16 @@ nav {
   margin-top: 12px;
 }
 
+/* Insights Section */
+.insights-section {
+  margin-bottom: 32px;
+}
+
 /* Insights Grid */
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-bottom: 32px;
 }
 
 .insight-card {

@@ -373,9 +373,13 @@ export default function RunCoach() {
               </div>
             </section>
 
-            {/* Insights Grid */}
-            <div className="insights-grid animate-in delay-5">
-              <div className="insight-card positive">
+            {/* Insights */}
+            <section className="insights-section animate-in delay-5">
+              <div className="section-header">
+                <h2 className="section-title">Training Insights</h2>
+              </div>
+              <div className="insights-grid">
+                <div className="insight-card positive">
                 <div className="insight-icon">📈</div>
                 <h3 className="insight-title">Pace Improving</h3>
                 <p className="insight-text">Your average pace has improved by 2+ min/mi since you started. Fantastic aerobic development!</p>
@@ -390,7 +394,8 @@ export default function RunCoach() {
                 <h3 className="insight-title">Race Prediction</h3>
                 <p className="insight-text">Based on current pace, you're on track for a 2:45-2:55 half marathon finish. Keep it up!</p>
               </div>
-            </div>
+              </div>
+            </section>
           </div>
         )}
 
