@@ -173,9 +173,21 @@ export default function RunCoach() {
         body: formData,
       });
 
-      const data = await response.json();
-      if (data.success) {
-        setExtractedData(data.runData);
+      const result = await response.json();
+      console.log('API response:', result);
+
+      if (result.success && result.data) {
+        // Map the API response to match our display format
+        setExtractedData({
+          distance: result.data.distance ? `${result.data.distance} mi` : null,
+          duration: result.data.time || null,
+          pace: result.data.pace ? `${result.data.pace}/mi` : null,
+          heartRate: result.data.hr ? `${result.data.hr} bpm` : null,
+          calories: result.data.calories || null,
+          date: result.data.date || null,
+        });
+      } else {
+        console.error('Extraction failed:', result.error || 'Unknown error');
       }
     } catch (error) {
       console.error('Extraction error:', error);
