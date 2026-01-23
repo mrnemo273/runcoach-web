@@ -277,12 +277,47 @@ export default function RunCoach() {
                   </div>
                 </div>
                 <div className="chart-container">
-                  <div className="chart-placeholder">
-                    <div className="chart-bars">
-                      {[12, 13, 19, 16].map((height, i) => (
+                  {/* Legend */}
+                  <div className="chart-legend">
+                    <div className="legend-item">
+                      <span className="legend-color actual"></span>
+                      <span className="legend-text">ACTUAL</span>
+                    </div>
+                    <div className="legend-item">
+                      <span className="legend-color target"></span>
+                      <span className="legend-text">TARGET</span>
+                    </div>
+                  </div>
+
+                  {/* Chart with Y-axis */}
+                  <div className="chart-wrapper">
+                    <div className="chart-y-axis">
+                      <span>25</span>
+                      <span>20</span>
+                      <span>15</span>
+                      <span>10</span>
+                      <span>5</span>
+                      <span>0</span>
+                    </div>
+                    <div className="chart-area">
+                      {[
+                        { label: 'W1 NOV', actual: 12.5, target: 12.5 },
+                        { label: 'W2 NOV', actual: 16, target: 14 },
+                        { label: 'W3 NOV', actual: 18, target: 15.5 },
+                        { label: 'W4 NOV', actual: 16.5, target: 17 },
+                        { label: 'W1 DEC', actual: 10.5, target: 18 },
+                        { label: 'W2 DEC', actual: 12, target: 20 },
+                        { label: 'W3 DEC', actual: 9.5, target: 22.5 },
+                        { label: 'W4 DEC', actual: 2, target: 18 },
+                        { label: 'W1 JAN', actual: 7.5, target: 24.5 },
+                        { label: 'W2 JAN', actual: 8, target: 20 },
+                      ].map((week, i) => (
                         <div key={i} className="chart-bar-group">
-                          <div className="chart-bar" style={{ height: `${height * 10}px` }}></div>
-                          <span className="chart-label">W{i + 1}</span>
+                          <div className="bar-pair">
+                            <div className="chart-bar actual" style={{ height: `${(week.actual / 25) * 100}%` }}></div>
+                            <div className="chart-bar target" style={{ height: `${(week.target / 25) * 100}%` }}></div>
+                          </div>
+                          <span className="chart-label">{week.label}</span>
                         </div>
                       ))}
                     </div>
