@@ -1252,9 +1252,9 @@ header {
 
 /* Day Cards */
 .cal-day {
-  background: var(--cream);
+  background: transparent;
   border-radius: 16px;
-  padding: 12px;
+  padding: 12px 14px;
   min-height: 120px;
   display: flex;
   flex-direction: column;
@@ -1279,15 +1279,18 @@ header {
   box-shadow: none;
 }
 
-/* Past days - darker background, gray text */
+/* Past days - light gray background, muted text */
 .cal-day-past {
-  background: #E8E4DD;
+  background: var(--cream-dark);
 }
 
 .cal-day-past .cal-day-num,
 .cal-day-past .cal-day-type,
-.cal-day-past .cal-day-distance {
+.cal-day-past .cal-day-distance,
+.cal-day-past .cal-day-emoji,
+.cal-day-past .cal-day-duration {
   color: var(--stone);
+  opacity: 0.7;
 }
 
 /* Run type borders */
@@ -1339,6 +1342,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin-bottom: 4px;
 }
 
 .cal-day-num {
