@@ -1555,14 +1555,67 @@ footer strong {
   color: var(--charcoal);
 }
 
-.race-card-active {
+/* Toggle Switch */
+.race-card-toggle {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--forest-green);
-  font-weight: 600;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--cream);
+  border-radius: 10px;
   margin-bottom: 12px;
+}
+
+.toggle-label {
+  font-size: 13px;
+  color: var(--stone);
+  font-weight: 500;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 28px;
+  background: var(--stone-light);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-switch.on {
+  background: var(--forest-green);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch.on .toggle-knob {
+  transform: translateX(20px);
+}
+
+.toggle-switch.large {
+  width: 56px;
+  height: 32px;
+  border-radius: 16px;
+}
+
+.toggle-switch.large .toggle-knob {
+  width: 26px;
+  height: 26px;
+}
+
+.toggle-switch.large.on .toggle-knob {
+  transform: translateX(24px);
 }
 
 .race-card-course {
@@ -1571,6 +1624,314 @@ footer strong {
   font-style: italic;
   line-height: 1.5;
   margin: 0;
+}
+
+/* ========================================
+   RACE DETAIL SHEET
+   ======================================== */
+
+.race-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.race-detail-sheet {
+  background: var(--white);
+  border-radius: 24px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-handle {
+  display: none;
+}
+
+.sheet-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  color: var(--charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.sheet-close:hover {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.sheet-hero {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sheet-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sheet-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+}
+
+.sheet-hero-content {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  right: 24px;
+}
+
+.sheet-distance {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--white);
+  background: var(--forest-green);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.sheet-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--white);
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.sheet-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sheet-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sheet-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.info-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.info-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--stone);
+  margin-bottom: 2px;
+}
+
+.info-value {
+  display: block;
+  font-size: 14px;
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+.sheet-section {
+  margin-bottom: 24px;
+}
+
+.sheet-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.sheet-description {
+  font-size: 14px;
+  color: var(--stone);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Tips Loading */
+.tips-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: var(--cream);
+  border-radius: 12px;
+  color: var(--stone);
+  font-size: 14px;
+}
+
+.tips-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cream-dark);
+  border-top-color: var(--forest-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Tips List */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tip-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: var(--cream);
+  border-radius: 12px;
+}
+
+.tip-number {
+  width: 24px;
+  height: 24px;
+  background: var(--forest-green);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 14px;
+  color: var(--charcoal);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sheet-link {
+  display: inline-block;
+  color: var(--forest-green);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.sheet-link:hover {
+  text-decoration: underline;
+}
+
+.sheet-actions {
+  border-top: 1px solid var(--cream-dark);
+  padding-top: 20px;
+}
+
+.sheet-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-label-large {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: var(--charcoal);
+  letter-spacing: 0.5px;
+}
+
+/* Mobile Bottom Sheet */
+@media (max-width: 600px) {
+  .race-detail-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .race-detail-sheet {
+    border-radius: 24px 24px 0 0;
+    max-height: 92vh;
+    animation: slideUpMobile 0.3s ease;
+  }
+
+  @keyframes slideUpMobile {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .sheet-handle {
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--stone-light);
+    border-radius: 2px;
+    margin: 12px auto;
+    cursor: pointer;
+  }
+
+  .sheet-close {
+    display: none;
+  }
+
+  .sheet-hero {
+    height: 180px;
+  }
+
+  .sheet-title {
+    font-size: 28px;
+  }
+
+  .sheet-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sheet-content {
+    padding: 20px;
+  }
 }
 
 /* Add Race Button */

@@ -20,6 +20,9 @@ export default function RunCoach() {
   const [newRace, setNewRace] = useState({ name: '', date: '', distance: '' });
   const [isAddingRace, setIsAddingRace] = useState(false);
   const [selectedRaceId, setSelectedRaceId] = useState('dc-half-2026');
+  const [raceDetailId, setRaceDetailId] = useState(null);
+  const [raceTips, setRaceTips] = useState({});
+  const [isLoadingTips, setIsLoadingTips] = useState(false);
   const fileInputRef = useRef(null);
 
   // Races data
@@ -416,6 +419,46 @@ export default function RunCoach() {
     }
   };
 
+  // Toggle active training plan
+  const toggleActivePlan = (raceId, e) => {
+    e.stopPropagation();
+    if (selectedRaceId === raceId) {
+      setSelectedRaceId(null); // Turn off
+    } else {
+      setSelectedRaceId(raceId); // Turn on
+    }
+  };
+
+  // Open race detail view
+  const openRaceDetail = async (race) => {
+    setRaceDetailId(race.id);
+
+    // Load tips if not already loaded
+    if (!raceTips[race.id]) {
+      setIsLoadingTips(true);
+      try {
+        const response = await fetch('/api/race-tips', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            raceName: race.name,
+            location: race.location,
+            distance: race.distanceLabel,
+            courseInfo: race.courseInfo
+          })
+        });
+        const result = await response.json();
+        if (result.success) {
+          setRaceTips(prev => ({ ...prev, [race.id]: result.tips }));
+        }
+      } catch (error) {
+        console.error('Error loading race tips:', error);
+      } finally {
+        setIsLoadingTips(false);
+      }
+    }
+  };
+
   // Format date
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
@@ -426,6 +469,7 @@ export default function RunCoach() {
   };
 
   const recentRuns = [...runData].reverse().slice(0, 5);
+  const detailRace = races.find(r => r.id === raceDetailId);
 
   return (
     <>
@@ -953,7 +997,7 @@ export default function RunCoach() {
                         <div
                           key={race.id}
                           className={`race-card has-image ${selectedRaceId === race.id ? 'selected' : ''}`}
-                          onClick={() => setSelectedRaceId(race.id)}
+                          onClick={() => openRaceDetail(race)}
                         >
                           {race.image && (
                             <div className="race-card-image">
@@ -977,11 +1021,15 @@ export default function RunCoach() {
                                 <span className="goal-time">{race.goalTime}</span>
                               </div>
                             )}
-                            {selectedRaceId === race.id && (
-                              <div className="race-card-active">
-                                <span>✓ Active Training Plan</span>
-                              </div>
-                            )}
+                            <div className="race-card-toggle" onClick={(e) => e.stopPropagation()}>
+                              <span className="toggle-label">Active Plan</span>
+                              <button
+                                className={`toggle-switch ${selectedRaceId === race.id ? 'on' : ''}`}
+                                onClick={(e) => toggleActivePlan(race.id, e)}
+                              >
+                                <span className="toggle-knob"></span>
+                              </button>
+                            </div>
                             {race.courseInfo && (
                               <p className="race-card-course">{race.courseInfo}</p>
                             )}
@@ -1094,6 +1142,117 @@ export default function RunCoach() {
                   <span className="spinner"></span>
                   <span className="btn-text">{isAddingRace ? 'Creating Plan...' : 'Add Race & Generate Plan'}</span>
                 </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Race Detail Sheet */}
+        {raceDetailId && detailRace && (
+          <div className="race-detail-overlay" onClick={() => setRaceDetailId(null)}>
+            <div className="race-detail-sheet" onClick={(e) => e.stopPropagation()}>
+              <div className="sheet-handle" onClick={() => setRaceDetailId(null)}></div>
+              <button className="sheet-close" onClick={() => setRaceDetailId(null)}>×</button>
+
+              {detailRace.image && (
+                <div className="sheet-hero">
+                  <img src={detailRace.image} alt={detailRace.name} />
+                  <div className="sheet-hero-overlay"></div>
+                  <div className="sheet-hero-content">
+                    <span className="sheet-distance">{detailRace.distanceLabel}</span>
+                    <h2 className="sheet-title">{detailRace.name}</h2>
+                  </div>
+                </div>
+              )}
+
+              <div className="sheet-content">
+                <div className="sheet-info-grid">
+                  <div className="sheet-info-item">
+                    <span className="info-icon">📅</span>
+                    <div>
+                      <span className="info-label">Date</span>
+                      <span className="info-value">{new Date(detailRace.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                    </div>
+                  </div>
+                  <div className="sheet-info-item">
+                    <span className="info-icon">📍</span>
+                    <div>
+                      <span className="info-label">Location</span>
+                      <span className="info-value">{detailRace.location}</span>
+                    </div>
+                  </div>
+                  {detailRace.elevation && (
+                    <div className="sheet-info-item">
+                      <span className="info-icon">⛰️</span>
+                      <div>
+                        <span className="info-label">Elevation</span>
+                        <span className="info-value">{detailRace.elevation}</span>
+                      </div>
+                    </div>
+                  )}
+                  {detailRace.goalTime && (
+                    <div className="sheet-info-item">
+                      <span className="info-icon">🎯</span>
+                      <div>
+                        <span className="info-label">Goal Time</span>
+                        <span className="info-value">{detailRace.goalTime}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {detailRace.description && (
+                  <div className="sheet-section">
+                    <h3 className="sheet-section-title">About the Race</h3>
+                    <p className="sheet-description">{detailRace.description}</p>
+                  </div>
+                )}
+
+                {detailRace.courseInfo && (
+                  <div className="sheet-section">
+                    <h3 className="sheet-section-title">Course Info</h3>
+                    <p className="sheet-description">{detailRace.courseInfo}</p>
+                  </div>
+                )}
+
+                <div className="sheet-section">
+                  <h3 className="sheet-section-title">💡 Tips from Past Runners</h3>
+                  {isLoadingTips ? (
+                    <div className="tips-loading">
+                      <div className="tips-spinner"></div>
+                      <span>Loading insider tips...</span>
+                    </div>
+                  ) : raceTips[detailRace.id] ? (
+                    <div className="tips-list">
+                      {raceTips[detailRace.id].map((tip, i) => (
+                        <div key={i} className="tip-item">
+                          <span className="tip-number">{i + 1}</span>
+                          <p className="tip-text">{tip}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="sheet-description">Tips could not be loaded.</p>
+                  )}
+                </div>
+
+                {detailRace.website && (
+                  <a href={detailRace.website} target="_blank" rel="noopener noreferrer" className="sheet-link">
+                    Visit Official Website →
+                  </a>
+                )}
+
+                <div className="sheet-actions">
+                  <div className="sheet-toggle">
+                    <span className="toggle-label-large">Training Plan Active</span>
+                    <button
+                      className={`toggle-switch large ${selectedRaceId === detailRace.id ? 'on' : ''}`}
+                      onClick={(e) => toggleActivePlan(detailRace.id, e)}
+                    >
+                      <span className="toggle-knob"></span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
