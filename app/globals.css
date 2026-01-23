@@ -1529,6 +1529,13 @@ footer strong {
   color: var(--stone);
 }
 
+.race-card-active-badge {
+  font-size: 13px;
+  color: var(--forest);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
 .race-card-goal,
 .race-card-result {
   display: flex;
@@ -1793,6 +1800,24 @@ footer strong {
   padding: 24px;
   overflow-y: auto;
   flex: 1;
+}
+
+.sheet-status-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--cream);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.status-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--charcoal);
 }
 
 .sheet-info-grid {

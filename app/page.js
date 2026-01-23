@@ -1014,6 +1014,9 @@ export default function RunCoach() {
                             <div className="race-card-details">
                               <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                               <span className="race-card-location">📍 {race.location}</span>
+                              {selectedRaceId === race.id && (
+                                <span className="race-card-active-badge">✅ Active</span>
+                              )}
                             </div>
                             {race.goalTime && (
                               <div className="race-card-goal">
@@ -1021,16 +1024,6 @@ export default function RunCoach() {
                                 <span className="goal-time">{race.goalTime}</span>
                               </div>
                             )}
-                            <div className="race-card-toggle" onClick={(e) => e.stopPropagation()}>
-                              <button
-                                className={`toggle-switch ${selectedRaceId === race.id ? 'on' : ''}`}
-                                onClick={(e) => toggleActivePlan(race.id, e)}
-                              >
-                                <span className="toggle-text on-text">ACTIVE</span>
-                                <span className="toggle-text off-text">INACTIVE</span>
-                                <span className="toggle-knob"><span></span></span>
-                              </button>
-                            </div>
                           </div>
                         </div>
                       );
@@ -1164,6 +1157,19 @@ export default function RunCoach() {
               )}
 
               <div className="sheet-content">
+                {/* Status Toggle - at top of sheet */}
+                <div className="sheet-status-toggle">
+                  <span className="status-label">STATUS</span>
+                  <button
+                    className={`toggle-switch large ${selectedRaceId === detailRace.id ? 'on' : ''}`}
+                    onClick={(e) => toggleActivePlan(detailRace.id, e)}
+                  >
+                    <span className="toggle-text on-text">ACTIVE</span>
+                    <span className="toggle-text off-text">INACTIVE</span>
+                    <span className="toggle-knob"><span></span></span>
+                  </button>
+                </div>
+
                 <div className="sheet-info-grid">
                   <div className="sheet-info-item">
                     <span className="info-icon">📅</span>
@@ -1240,19 +1246,6 @@ export default function RunCoach() {
                   </a>
                 )}
 
-                <div className="sheet-actions">
-                  <div className="sheet-toggle">
-                    <span className="toggle-label-large">Training Plan</span>
-                    <button
-                      className={`toggle-switch large ${selectedRaceId === detailRace.id ? 'on' : ''}`}
-                      onClick={(e) => toggleActivePlan(detailRace.id, e)}
-                    >
-                      <span className="toggle-text on-text">ACTIVE</span>
-                      <span className="toggle-text off-text">INACTIVE</span>
-                      <span className="toggle-knob"><span></span></span>
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
