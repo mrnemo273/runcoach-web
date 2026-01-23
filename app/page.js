@@ -78,6 +78,48 @@ export default function RunCoach() {
   const totalCalories = runData.reduce((sum, r) => sum + r.calories, 0).toLocaleString();
   const avgHR = Math.round(runData.reduce((sum, r) => sum + r.hr, 0) / runData.length);
 
+  // Calculate weekly mileage from actual run data
+  const getWeeklyData = () => {
+    const weeks = {};
+
+    runData.forEach(run => {
+      const date = new Date(run.date);
+      // Get the Monday of that week
+      const day = date.getDay();
+      const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+      const monday = new Date(date.setDate(diff));
+      const weekKey = monday.toISOString().split('T')[0];
+
+      if (!weeks[weekKey]) {
+        weeks[weekKey] = { total: 0, date: new Date(weekKey) };
+      }
+      weeks[weekKey].total += run.distance;
+    });
+
+    // Sort by date and format
+    const sortedWeeks = Object.entries(weeks)
+      .sort((a, b) => new Date(a[0]) - new Date(b[0]))
+      .map(([key, data]) => {
+        const date = new Date(key);
+        const month = date.toLocaleString('default', { month: 'short' }).toUpperCase();
+        const weekOfMonth = Math.ceil(date.getDate() / 7);
+        return {
+          label: `W${weekOfMonth} ${month}`,
+          actual: Math.round(data.total * 10) / 10
+        };
+      });
+
+    // Target mileage per week (progressive training plan)
+    const targets = [12.5, 14, 15.5, 17, 18, 20, 22.5, 18, 24.5, 20, 16, 13.1];
+
+    return sortedWeeks.map((week, i) => ({
+      ...week,
+      target: targets[i] || 20
+    }));
+  };
+
+  const weeklyData = getWeeklyData();
+
   // Countdown timer
   useEffect(() => {
     const updateCountdown = () => {
@@ -300,18 +342,7 @@ export default function RunCoach() {
                       <span>0</span>
                     </div>
                     <div className="chart-area">
-                      {[
-                        { label: 'W1 NOV', actual: 12.5, target: 12.5 },
-                        { label: 'W2 NOV', actual: 16, target: 14 },
-                        { label: 'W3 NOV', actual: 18, target: 15.5 },
-                        { label: 'W4 NOV', actual: 16.5, target: 17 },
-                        { label: 'W1 DEC', actual: 10.5, target: 18 },
-                        { label: 'W2 DEC', actual: 12, target: 20 },
-                        { label: 'W3 DEC', actual: 9.5, target: 22.5 },
-                        { label: 'W4 DEC', actual: 2, target: 18 },
-                        { label: 'W1 JAN', actual: 7.5, target: 24.5 },
-                        { label: 'W2 JAN', actual: 8, target: 20 },
-                      ].map((week, i) => (
+                      {weeklyData.map((week, i) => (
                         <div key={i} className="chart-bar-group">
                           <div className="bar-pair">
                             <div className="chart-bar actual" style={{ height: `${(week.actual / 25) * 100}%` }}></div>

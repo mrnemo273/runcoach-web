@@ -400,10 +400,11 @@ nav {
 
 /* Chart Container */
 .chart-container {
-  height: 320px;
+  height: 280px;
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 8px;
 }
 
 /* Chart Legend */
@@ -452,7 +453,7 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 28px;
+  padding-bottom: 24px;
   text-align: right;
   min-width: 24px;
 }
@@ -482,7 +483,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 28px;
+  bottom: 24px;
   background: repeating-linear-gradient(
     to bottom,
     var(--cream-dark) 0px,
@@ -533,10 +534,11 @@ nav {
 
 .chart-label {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--stone);
   white-space: nowrap;
   letter-spacing: 0.5px;
+  margin-top: 4px;
 }
 
 /* Responsive chart */
