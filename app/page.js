@@ -16,10 +16,48 @@ export default function RunCoach() {
   const [isSaving, setIsSaving] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toast, setToast] = useState({ visible: false, message: '', insight: '' });
+  const [showAddRaceModal, setShowAddRaceModal] = useState(false);
+  const [newRace, setNewRace] = useState({ name: '', date: '', distance: '' });
+  const [isAddingRace, setIsAddingRace] = useState(false);
+  const [selectedRaceId, setSelectedRaceId] = useState('dc-half-2026');
   const fileInputRef = useRef(null);
-  
-  // Race date: March 21, 2026
-  const raceDate = new Date('2026-03-21T07:00:00');
+
+  // Races data
+  const [races, setRaces] = useState([
+    {
+      id: 'dc-half-2026',
+      name: 'DC Half Marathon',
+      date: '2026-03-21',
+      distance: 13.1,
+      distanceLabel: 'Half Marathon',
+      location: 'Washington, D.C.',
+      status: 'upcoming', // upcoming, completed
+      goalTime: '2:45:00',
+      actualTime: null,
+      description: 'The Credit Union Cherry Blossom Ten Mile Run & 5K celebrates spring in the nation\'s capital.',
+      courseInfo: 'Flat, fast course through the National Mall and Tidal Basin',
+      elevation: '150 ft gain',
+      website: 'https://www.runrocknroll.com/dc',
+      trainingPlan: [
+        { week: 1, phase: 'Base', runs: ['3 mi', '4 mi', '5 mi'], status: 'completed' },
+        { week: 2, phase: 'Base', runs: ['3 mi', '4 mi', '6 mi'], status: 'completed' },
+        { week: 3, phase: 'Foundation', runs: ['3 mi', '5 mi', '10 mi'], status: 'completed' },
+        { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '6 mi'], status: 'current' },
+        { week: 5, phase: 'Build', runs: ['4 mi', '5 mi', '8 mi'], status: 'upcoming' },
+        { week: 6, phase: 'Build', runs: ['4 mi', '6 mi', '9 mi'], status: 'upcoming' },
+        { week: 7, phase: 'Build', runs: ['4 mi', '6 mi', '10 mi'], status: 'upcoming' },
+        { week: 8, phase: 'Peak', runs: ['4 mi', '6 mi', '11 mi'], status: 'upcoming' },
+        { week: 9, phase: 'Peak', runs: ['4 mi', '6 mi', '12 mi'], status: 'upcoming' },
+        { week: 10, phase: 'Taper', runs: ['3 mi', '5 mi', '8 mi'], status: 'upcoming' },
+        { week: 11, phase: 'Taper', runs: ['3 mi', '4 mi', '5 mi'], status: 'upcoming' },
+        { week: 12, phase: 'Race Week', runs: ['2 mi', '3 mi', '13.1 mi'], status: 'upcoming' },
+      ]
+    }
+  ]);
+
+  // Get currently selected race
+  const selectedRace = races.find(r => r.id === selectedRaceId) || races[0];
+  const raceDate = selectedRace ? new Date(selectedRace.date + 'T07:00:00') : new Date();
 
   // Run data from your training
   const runData = [
@@ -62,21 +100,8 @@ export default function RunCoach() {
     { icon: '🏅', title: 'Half Marathoner', desc: 'Complete DC Half!', date: null, achieved: false },
   ];
 
-  // Training plan
-  const trainingPlan = [
-    { week: 1, phase: 'Base', runs: ['3 mi', '4 mi', '5 mi'], status: 'completed' },
-    { week: 2, phase: 'Base', runs: ['3 mi', '4 mi', '6 mi'], status: 'completed' },
-    { week: 3, phase: 'Foundation', runs: ['3 mi', '5 mi', '10 mi'], status: 'completed' },
-    { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '6 mi'], status: 'current' },
-    { week: 5, phase: 'Build', runs: ['4 mi', '5 mi', '8 mi'], status: 'upcoming' },
-    { week: 6, phase: 'Build', runs: ['4 mi', '6 mi', '9 mi'], status: 'upcoming' },
-    { week: 7, phase: 'Build', runs: ['4 mi', '6 mi', '10 mi'], status: 'upcoming' },
-    { week: 8, phase: 'Peak', runs: ['4 mi', '6 mi', '11 mi'], status: 'upcoming' },
-    { week: 9, phase: 'Peak', runs: ['4 mi', '6 mi', '12 mi'], status: 'upcoming' },
-    { week: 10, phase: 'Taper', runs: ['3 mi', '5 mi', '8 mi'], status: 'upcoming' },
-    { week: 11, phase: 'Taper', runs: ['3 mi', '4 mi', '5 mi'], status: 'upcoming' },
-    { week: 12, phase: 'Race Week', runs: ['2 mi', '3 mi', '13.1 mi'], status: 'upcoming' },
-  ];
+  // Training plan from selected race
+  const trainingPlan = selectedRace?.trainingPlan || [];
 
   // Calculate stats
   const totalMiles = runData.reduce((sum, r) => sum + r.distance, 0).toFixed(1);
@@ -326,6 +351,69 @@ export default function RunCoach() {
     setSaveSuccess(false);
   };
 
+  // Handle adding a new race
+  const handleAddRace = async () => {
+    if (!newRace.name || !newRace.date || !newRace.distance) return;
+
+    setIsAddingRace(true);
+
+    try {
+      // Call API to get race details and generate training plan
+      const response = await fetch('/api/generate-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          raceName: newRace.name,
+          raceDate: newRace.date,
+          distance: newRace.distance,
+          runHistory: runData
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        const distanceMap = {
+          '5k': { miles: 3.1, label: '5K' },
+          '10k': { miles: 6.2, label: '10K' },
+          'half': { miles: 13.1, label: 'Half Marathon' },
+          'marathon': { miles: 26.2, label: 'Marathon' },
+          'other': { miles: 0, label: 'Custom' }
+        };
+
+        const newRaceEntry = {
+          id: `race-${Date.now()}`,
+          name: result.raceInfo?.name || newRace.name,
+          date: newRace.date,
+          distance: distanceMap[newRace.distance]?.miles || 0,
+          distanceLabel: distanceMap[newRace.distance]?.label || newRace.distance,
+          location: result.raceInfo?.location || 'TBD',
+          status: 'upcoming',
+          goalTime: result.raceInfo?.goalTime || null,
+          actualTime: null,
+          description: result.raceInfo?.description || '',
+          courseInfo: result.raceInfo?.courseInfo || '',
+          elevation: result.raceInfo?.elevation || '',
+          website: result.raceInfo?.website || '',
+          trainingPlan: result.trainingPlan || []
+        };
+
+        setRaces(prev => [...prev, newRaceEntry]);
+        setSelectedRaceId(newRaceEntry.id);
+        setShowAddRaceModal(false);
+        setNewRace({ name: '', date: '', distance: '' });
+
+        showToast('Race added!', `Your ${newRaceEntry.distanceLabel} training plan is ready.`);
+        setActiveTab('training');
+      }
+    } catch (error) {
+      console.error('Error adding race:', error);
+      showToast('Error', 'Could not create training plan. Please try again.');
+    } finally {
+      setIsAddingRace(false);
+    }
+  };
+
   // Format date
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
@@ -356,7 +444,7 @@ export default function RunCoach() {
       {/* Mobile Navigation Overlay */}
       <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav">
-          {['dashboard', 'logrun', 'training', 'insights', 'history'].map((tab, index) => (
+          {['dashboard', 'races', 'training', 'logrun', 'history'].map((tab, index) => (
             <button
               key={tab}
               className={`mobile-nav-link ${activeTab === tab ? 'active' : ''}`}
@@ -366,7 +454,7 @@ export default function RunCoach() {
               }}
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              {tab === 'logrun' ? 'LOG RUN' : tab === 'training' ? 'TRAINING PLAN' : tab.toUpperCase()}
+              {tab === 'logrun' ? 'LOG RUN' : tab === 'races' ? 'MY RACES' : tab === 'training' ? 'TRAINING' : tab.toUpperCase()}
             </button>
           ))}
         </nav>
@@ -382,13 +470,13 @@ export default function RunCoach() {
             </div>
             {/* Desktop Navigation */}
             <nav className="desktop-nav">
-              {['dashboard', 'logrun', 'training', 'insights', 'history'].map(tab => (
+              {['dashboard', 'races', 'training', 'logrun', 'history'].map(tab => (
                 <button
                   key={tab}
                   className={`nav-link ${activeTab === tab ? 'active' : ''}`}
                   onClick={() => setActiveTab(tab)}
                 >
-                  {tab === 'logrun' ? 'LOG RUN' : tab === 'training' ? 'TRAINING PLAN' : tab.toUpperCase()}
+                  {tab === 'logrun' ? 'LOG RUN' : tab === 'races' ? 'MY RACES' : tab === 'training' ? 'TRAINING' : tab.toUpperCase()}
                 </button>
               ))}
             </nav>
@@ -836,6 +924,159 @@ export default function RunCoach() {
                     </div>
                   </div>
                 </div>
+            </div>
+          </div>
+        )}
+
+        {/* My Races Tab */}
+        {activeTab === 'races' && (
+          <div className="tab-content active">
+            <section className="race-hero animate-in">
+              <div className="race-info">
+                <div className="race-label">YOUR RUNNING JOURNEY</div>
+                <h1 className="race-title">My Races</h1>
+                <p className="race-meta">{races.filter(r => r.status === 'completed').length} completed · {races.filter(r => r.status === 'upcoming').length} upcoming</p>
+              </div>
+            </section>
+
+            <div className="races-container animate-in delay-1">
+              {/* Upcoming Races */}
+              {races.filter(r => r.status === 'upcoming').length > 0 && (
+                <div className="races-section">
+                  <h2 className="races-section-title">🎯 Upcoming Races</h2>
+                  <div className="races-grid">
+                    {races.filter(r => r.status === 'upcoming').map(race => {
+                      const daysUntil = Math.ceil((new Date(race.date) - new Date()) / (1000 * 60 * 60 * 24));
+                      return (
+                        <div
+                          key={race.id}
+                          className={`race-card ${selectedRaceId === race.id ? 'selected' : ''}`}
+                          onClick={() => setSelectedRaceId(race.id)}
+                        >
+                          <div className="race-card-header">
+                            <span className="race-card-distance">{race.distanceLabel}</span>
+                            <span className="race-card-countdown">{daysUntil} days</span>
+                          </div>
+                          <h3 className="race-card-name">{race.name}</h3>
+                          <div className="race-card-details">
+                            <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                            <span className="race-card-location">📍 {race.location}</span>
+                          </div>
+                          {race.goalTime && (
+                            <div className="race-card-goal">
+                              <span className="goal-label">Goal Time</span>
+                              <span className="goal-time">{race.goalTime}</span>
+                            </div>
+                          )}
+                          {selectedRaceId === race.id && (
+                            <div className="race-card-active">
+                              <span>✓ Active Training Plan</span>
+                            </div>
+                          )}
+                          {race.courseInfo && (
+                            <p className="race-card-course">{race.courseInfo}</p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Completed Races */}
+              {races.filter(r => r.status === 'completed').length > 0 && (
+                <div className="races-section">
+                  <h2 className="races-section-title">🏅 Completed Races</h2>
+                  <div className="races-grid">
+                    {races.filter(r => r.status === 'completed').map(race => (
+                      <div key={race.id} className="race-card completed">
+                        <div className="race-card-header">
+                          <span className="race-card-distance">{race.distanceLabel}</span>
+                          <span className="race-card-finish">✓ Finished</span>
+                        </div>
+                        <h3 className="race-card-name">{race.name}</h3>
+                        <div className="race-card-details">
+                          <span className="race-card-date">📅 {new Date(race.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                          <span className="race-card-location">📍 {race.location}</span>
+                        </div>
+                        {race.actualTime && (
+                          <div className="race-card-result">
+                            <span className="result-label">Finish Time</span>
+                            <span className="result-time">{race.actualTime}</span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Add Race Button */}
+              <button className="add-race-btn" onClick={() => setShowAddRaceModal(true)}>
+                <span className="add-race-icon">+</span>
+                <span className="add-race-text">Add New Race</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Add Race Modal */}
+        {showAddRaceModal && (
+          <div className="modal-overlay" onClick={() => setShowAddRaceModal(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <button className="modal-close" onClick={() => setShowAddRaceModal(false)}>×</button>
+              <h2 className="modal-title">Add New Race</h2>
+              <p className="modal-subtitle">Enter the basics and we'll find the rest</p>
+
+              <div className="modal-form">
+                <div className="form-group">
+                  <label className="form-label">Race Name</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="e.g., Boston Marathon, NYC Half"
+                    value={newRace.name}
+                    onChange={e => setNewRace({...newRace, name: e.target.value})}
+                  />
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Race Date</label>
+                    <input
+                      type="date"
+                      className="form-input"
+                      value={newRace.date}
+                      onChange={e => setNewRace({...newRace, date: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Distance</label>
+                    <select
+                      className="form-input"
+                      value={newRace.distance}
+                      onChange={e => setNewRace({...newRace, distance: e.target.value})}
+                    >
+                      <option value="">Select distance</option>
+                      <option value="5k">5K (3.1 mi)</option>
+                      <option value="10k">10K (6.2 mi)</option>
+                      <option value="half">Half Marathon (13.1 mi)</option>
+                      <option value="marathon">Marathon (26.2 mi)</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  className={`modal-submit ${isAddingRace ? 'loading' : ''}`}
+                  onClick={handleAddRace}
+                  disabled={!newRace.name || !newRace.date || !newRace.distance || isAddingRace}
+                >
+                  <span className="spinner"></span>
+                  <span className="btn-text">{isAddingRace ? 'Creating Plan...' : 'Add Race & Generate Plan'}</span>
+                </button>
+              </div>
             </div>
           </div>
         )}

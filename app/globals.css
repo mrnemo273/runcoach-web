@@ -1366,6 +1366,394 @@ footer strong {
 }
 
 /* ========================================
+   MY RACES TAB STYLES
+   ======================================== */
+
+.races-container {
+  padding: 48px 0;
+}
+
+.races-section {
+  margin-bottom: 48px;
+}
+
+.races-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.races-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.race-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.race-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.race-card.selected {
+  border-color: var(--forest-green);
+  background: linear-gradient(135deg, rgba(45, 106, 79, 0.03) 0%, var(--white) 100%);
+}
+
+.race-card.completed {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.race-card.completed:hover {
+  transform: none;
+}
+
+.race-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.race-card-distance {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--white);
+  background: var(--charcoal);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.race-card-countdown {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--forest-green);
+  letter-spacing: 0.5px;
+}
+
+.race-card-finish {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  color: var(--forest-green);
+  letter-spacing: 0.5px;
+}
+
+.race-card-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.race-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.race-card-date,
+.race-card-location {
+  font-size: 14px;
+  color: var(--stone);
+}
+
+.race-card-goal,
+.race-card-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--cream);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.goal-label,
+.result-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--stone);
+}
+
+.goal-time,
+.result-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--charcoal);
+}
+
+.race-card-active {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--forest-green);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.race-card-course {
+  font-size: 13px;
+  color: var(--stone);
+  font-style: italic;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Add Race Button */
+.add-race-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 20px 32px;
+  background: var(--white);
+  border: 2px dashed var(--stone-light);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-race-btn:hover {
+  border-color: var(--charcoal);
+  background: var(--cream);
+}
+
+.add-race-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--charcoal);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.add-race-btn:hover .add-race-icon {
+  background: var(--forest-green);
+}
+
+.add-race-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--charcoal);
+  letter-spacing: 0.5px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: var(--cream);
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  color: var(--stone);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-size: 15px;
+  color: var(--stone);
+  margin-bottom: 32px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--charcoal);
+}
+
+.form-input {
+  padding: 14px 16px;
+  border: 2px solid var(--cream-dark);
+  border-radius: 10px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  color: var(--charcoal);
+  background: var(--cream);
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--charcoal);
+  background: var(--white);
+}
+
+.form-input::placeholder {
+  color: var(--stone-light);
+}
+
+.modal-submit {
+  margin-top: 12px;
+  padding: 16px 32px;
+  background: var(--forest-green);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-submit:hover:not(:disabled) {
+  background: var(--charcoal);
+  transform: translateY(-2px);
+}
+
+.modal-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-submit .spinner {
+  display: none;
+}
+
+.modal-submit.loading .spinner {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.modal-submit.loading .btn-text {
+  margin-left: 8px;
+}
+
+@media (max-width: 600px) {
+  .races-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .modal-title {
+    font-size: 28px;
+  }
+}
+
+/* ========================================
    LOG RUN TAB STYLES
    ======================================== */
 
