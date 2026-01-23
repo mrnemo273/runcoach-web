@@ -973,7 +973,7 @@ export default function RunCoach() {
 
       {/* Toast Notification */}
       <div className={`toast ${toast.visible ? 'visible' : ''}`}>
-        <div className="toast-icon">✓</div>
+        <div className="toast-icon">🎉</div>
         <div className="toast-content">
           <div className="toast-title">{toast.message}</div>
           <div className="toast-insight">{toast.insight}</div>
