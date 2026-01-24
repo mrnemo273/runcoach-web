@@ -360,26 +360,17 @@ header {
   font-size: clamp(48px, 8vw, 72px);
   line-height: 0.95;
   letter-spacing: -1px;
-  color: var(--charcoal);
   margin-bottom: 16px;
-  position: relative;
-}
-
-.race-title::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -5%;
-  width: 110%;
-  height: 140%;
-  transform: translateY(-50%);
-  background:
-    radial-gradient(ellipse 80% 60% at 5% 50%, rgba(181, 175, 166, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 98% 40%, rgba(181, 175, 166, 0.35) 0%, transparent 45%),
-    radial-gradient(ellipse 40% 80% at 15% 90%, rgba(181, 175, 166, 0.25) 0%, transparent 50%);
-  filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='8'/%3E%3C/filter%3E%3C/svg%3E#n");
-  pointer-events: none;
-  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    var(--charcoal) 0%,
+    var(--charcoal) 60%,
+    rgba(29, 29, 29, 0.7) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .race-meta {
