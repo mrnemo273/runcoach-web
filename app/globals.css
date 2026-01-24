@@ -360,17 +360,8 @@ header {
   font-size: clamp(48px, 8vw, 72px);
   line-height: 0.95;
   letter-spacing: -1px;
+  color: var(--charcoal);
   margin-bottom: 16px;
-  background: linear-gradient(
-    135deg,
-    var(--charcoal) 0%,
-    var(--charcoal) 60%,
-    rgba(29, 29, 29, 0.7) 100%
-  );
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .race-meta {
