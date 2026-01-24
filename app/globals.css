@@ -68,13 +68,6 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.logo-dash {
-  width: 24px;
-  height: 5px;
-  background: var(--burnt-orange);
 }
 
 .logo-text {
@@ -85,8 +78,13 @@ header {
   color: var(--charcoal);
 }
 
-.logo-text span {
-  color: var(--burnt-orange);
+.logo-dash {
+  display: inline-block;
+  width: 16px;
+  height: 5px;
+  background: var(--burnt-orange);
+  margin: 0 4px;
+  vertical-align: middle;
 }
 
 /* Desktop Navigation */
@@ -299,7 +297,7 @@ header {
   }
 
   .logo-dash {
-    width: 20px;
+    width: 12px;
     height: 4px;
   }
 
