@@ -31,7 +31,7 @@ body {
     ellipse at 50% 30%,
     #FAF8F5 0%,
     #F2EDE6 50%,
-    #E2DAD0 100%
+    #D5CCC0 100%
   );
   background-attachment: fixed;
   color: var(--charcoal);
