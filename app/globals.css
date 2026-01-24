@@ -74,7 +74,7 @@ header {
   font-family: 'Google Sans Code', monospace;
   font-size: 32px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: var(--charcoal);
 }
 
@@ -85,6 +85,8 @@ header {
   background: var(--burnt-orange);
   margin: 0 4px;
   vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 
 /* Desktop Navigation */
