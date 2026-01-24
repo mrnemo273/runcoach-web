@@ -27,7 +27,13 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--cream);
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    var(--cream) 0%,
+    #F2EDE6 50%,
+    #EBE5DB 100%
+  );
+  background-attachment: fixed;
   color: var(--charcoal);
   min-height: 100vh;
   overflow-x: hidden;
