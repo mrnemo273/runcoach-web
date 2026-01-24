@@ -511,7 +511,7 @@ export default function RunCoach() {
         <header className="animate-in">
           <div className="header-inner">
             <div className="logo">
-              <div className="logo-mark">↗</div>
+              <span className="logo-dash"></span>
               <div className="logo-text">RUN<span>COACH</span></div>
             </div>
             {/* Desktop Navigation */}

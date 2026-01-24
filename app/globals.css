@@ -71,25 +71,17 @@ header {
   gap: 8px;
 }
 
-.logo-mark {
-  width: 36px;
-  height: 36px;
+.logo-dash {
+  width: 24px;
+  height: 3px;
   background: var(--burnt-orange);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  font-size: 18px;
-  position: relative;
-  top: 4px;
 }
 
 .logo-text {
   font-family: 'Google Sans Code', monospace;
   font-size: 32px;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-weight: 600;
+  letter-spacing: 1px;
   color: var(--charcoal);
 }
 
@@ -306,10 +298,9 @@ header {
     font-size: 26px;
   }
 
-  .logo-mark {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
+  .logo-dash {
+    width: 20px;
+    height: 2px;
   }
 
   .container {
