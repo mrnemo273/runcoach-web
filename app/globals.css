@@ -3086,7 +3086,8 @@ footer strong {
   height: 8px;
   border-radius: 50%;
   border: none;
-  background: var(--cream-dark);
+  background: var(--stone);
+  opacity: 0.35;
   cursor: pointer;
   padding: 0;
   transition: all 0.3s ease;
@@ -3094,11 +3095,12 @@ footer strong {
 
 .carousel-dot.active {
   background: var(--forest);
+  opacity: 1;
   transform: scale(1.2);
 }
 
 .carousel-dot:hover {
-  background: var(--stone);
+  opacity: 0.6;
 }
 
 /* Responsive */
