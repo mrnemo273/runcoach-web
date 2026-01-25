@@ -3023,6 +3023,9 @@ footer strong {
 }
 
 @media (max-width: 768px) {
+  .race-hero {
+    padding: 24px 0 16px;
+  }
   .race-hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
@@ -3031,21 +3034,31 @@ footer strong {
     max-width: 100%;
     text-align: center;
   }
+  .race-label {
+    justify-content: center;
+    margin-bottom: 8px;
+  }
   .race-title {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    margin-bottom: 8px;
   }
-  .race-label {
-    justify-content: center;
+  .race-meta {
+    font-size: 16px;
   }
   .countdown-container {
     text-align: center;
     width: 100%;
     overflow: visible;
+    margin-top: 16px;
+    padding: 8px 0;
   }
   .countdown {
     justify-content: center;
+  }
+  .countdown-block {
+    min-width: auto;
   }
   .stats-strip {
     grid-template-columns: 1fr;
@@ -3075,7 +3088,37 @@ footer strong {
     min-width: 80px;
   }
 
-  /* Scale down countdown for small screens */
+  /* Countdown sizing for mobile - larger and more readable */
+  .countdown {
+    gap: 20px;
+  }
+  .flip-clock {
+    gap: 5px;
+  }
+  .flip-card {
+    width: 50px;
+    height: 72px;
+  }
+  .card-top span,
+  .card-bottom span,
+  .card-flip-top span,
+  .card-flip-bottom span {
+    font-size: 50px;
+  }
+  .countdown-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    color: var(--stone);
+  }
+}
+
+@media (max-width: 400px) {
+  /* Slightly smaller for very small screens but still readable */
+  .race-title {
+    font-size: clamp(32px, 10vw, 48px);
+  }
   .countdown {
     gap: 16px;
   }
@@ -3083,46 +3126,19 @@ footer strong {
     gap: 4px;
   }
   .flip-card {
-    width: 42px;
-    height: 62px;
+    width: 44px;
+    height: 64px;
   }
   .card-top span,
   .card-bottom span,
   .card-flip-top span,
   .card-flip-bottom span {
-    font-size: 42px;
+    font-size: 44px;
   }
   .countdown-label {
-    font-size: 10px;
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 1.5px;
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 400px) {
-  /* Further scale down for very small screens */
-  .race-title {
-    font-size: clamp(32px, 10vw, 48px);
-  }
-  .countdown {
-    gap: 12px;
-  }
-  .flip-clock {
-    gap: 3px;
-  }
-  .flip-card {
-    width: 36px;
-    height: 52px;
-  }
-  .card-top span,
-  .card-bottom span,
-  .card-flip-top span,
-  .card-flip-bottom span {
-    font-size: 36px;
-  }
-  .countdown-label {
-    font-size: 9px;
-    letter-spacing: 1px;
   }
 }
 
