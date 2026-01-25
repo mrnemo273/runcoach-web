@@ -3009,14 +3009,14 @@ footer strong {
 .carousel-container {
   display: flex;
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  gap: 0;
-  margin: 0 -20px;
-  padding: 0 20px;
+  gap: 12px;
+  padding: 8px 0 12px;
 }
 
 .carousel-container::-webkit-scrollbar {
@@ -3024,10 +3024,10 @@ footer strong {
 }
 
 .carousel-card {
-  flex: 0 0 100%;
+  flex: 0 0 85%;
   scroll-snap-align: start;
   box-sizing: border-box;
-  margin-right: 16px;
+  transition: all 0.3s ease;
 }
 
 .carousel-card:last-child {
@@ -3043,6 +3043,10 @@ footer strong {
   border: 2px solid var(--forest);
 }
 
+.carousel-card.milestone:active {
+  transform: scale(0.98);
+}
+
 .carousel-card.insight-card {
   background: var(--white);
   border-radius: 16px;
@@ -3050,6 +3054,10 @@ footer strong {
   box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
+}
+
+.carousel-card.insight-card:active {
+  transform: scale(0.98);
 }
 
 .carousel-card.insight-card::before {
