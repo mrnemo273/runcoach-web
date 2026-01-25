@@ -1094,9 +1094,11 @@ header {
   filter: grayscale(0.5);
 }
 
-.milestone:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lifted);
+@media (hover: hover) {
+  .milestone:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lifted);
+  }
 }
 
 .milestone-icon {
@@ -1146,9 +1148,11 @@ header {
   transition: all 0.4s ease;
 }
 
-.insight-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lifted);
+@media (hover: hover) {
+  .insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lifted);
+  }
 }
 
 .insight-card::before {
