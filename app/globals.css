@@ -74,12 +74,17 @@ header {
 .logo {
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 28px;
+  left: 32px;
+  z-index: 1001;
+  height: 48px;
 }
 
 .logo-text {
   font-family: 'Google Sans Code', monospace;
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--charcoal);
   line-height: 1;
@@ -149,7 +154,9 @@ header {
   width: 48px;
   height: 48px;
   padding: 0;
-  background: var(--charcoal);
+  background: rgba(29, 29, 29, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -201,6 +208,12 @@ header {
   .hamburger {
     top: 20px;
     right: 20px;
+  }
+
+  .logo {
+    top: 20px;
+    left: 20px;
+    height: 44px;
   }
 }
 
@@ -286,21 +299,8 @@ header {
 
 /* Responsive - Mobile adjustments */
 @media (max-width: 768px) {
-  .header-inner {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .logo {
-    flex-shrink: 0;
-  }
-
   .logo-text {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .logo-dash {
