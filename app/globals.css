@@ -3027,11 +3027,22 @@ footer strong {
     grid-template-columns: 1fr;
     text-align: center;
   }
+  .race-info {
+    max-width: 100%;
+    text-align: center;
+  }
+  .race-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
   .race-label {
     justify-content: center;
   }
   .countdown-container {
     text-align: center;
+    width: 100%;
+    overflow: visible;
   }
   .countdown {
     justify-content: center;
@@ -3062,6 +3073,56 @@ footer strong {
   .feeling-option {
     flex: 1 1 calc(50% - 4px);
     min-width: 80px;
+  }
+
+  /* Scale down countdown for small screens */
+  .countdown {
+    gap: 16px;
+  }
+  .flip-clock {
+    gap: 4px;
+  }
+  .flip-card {
+    width: 42px;
+    height: 62px;
+  }
+  .card-top span,
+  .card-bottom span,
+  .card-flip-top span,
+  .card-flip-bottom span {
+    font-size: 42px;
+  }
+  .countdown-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Further scale down for very small screens */
+  .race-title {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+  .countdown {
+    gap: 12px;
+  }
+  .flip-clock {
+    gap: 3px;
+  }
+  .flip-card {
+    width: 36px;
+    height: 52px;
+  }
+  .card-top span,
+  .card-bottom span,
+  .card-flip-top span,
+  .card-flip-bottom span {
+    font-size: 36px;
+  }
+  .countdown-label {
+    font-size: 9px;
+    letter-spacing: 1px;
   }
 }
 
