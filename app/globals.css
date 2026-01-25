@@ -2997,6 +2997,102 @@ footer strong {
   animation: fadeIn 0.4s ease;
 }
 
+/* Mobile Carousel */
+.desktop-only {
+  display: grid;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 0;
+  margin: 0 -20px;
+  padding: 0 20px;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+  margin-right: 16px;
+}
+
+.carousel-card:last-child {
+  margin-right: 0;
+}
+
+.carousel-card.milestone {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--forest);
+}
+
+.carousel-card.insight-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-card.insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.carousel-card.insight-card.positive::before { background: var(--forest); }
+.carousel-card.insight-card.warning::before { background: var(--burnt-orange); }
+.carousel-card.insight-card.info::before { background: var(--charcoal); }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-bottom: 8px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--cream-dark);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: var(--forest);
+  transform: scale(1.2);
+}
+
+.carousel-dot:hover {
+  background: var(--stone);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .stats-strip {
@@ -3065,6 +3161,13 @@ footer strong {
   }
   .milestones-grid {
     grid-template-columns: 1fr;
+  }
+  /* Mobile carousel visibility */
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
   }
   .week-row {
     grid-template-columns: 1fr;

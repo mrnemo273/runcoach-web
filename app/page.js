@@ -23,7 +23,11 @@ export default function RunCoach() {
   const [raceDetailId, setRaceDetailId] = useState(null);
   const [raceTips, setRaceTips] = useState({});
   const [isLoadingTips, setIsLoadingTips] = useState(false);
+  const [milestonesCarouselIndex, setMilestonesCarouselIndex] = useState(0);
+  const [insightsCarouselIndex, setInsightsCarouselIndex] = useState(0);
   const fileInputRef = useRef(null);
+  const milestonesCarouselRef = useRef(null);
+  const insightsCarouselRef = useRef(null);
 
   // Races data
   const [races, setRaces] = useState([
@@ -759,7 +763,8 @@ export default function RunCoach() {
               <div className="section-header">
                 <h2 className="section-title">Milestones Achieved</h2>
               </div>
-              <div className="milestones-grid">
+              {/* Desktop grid view */}
+              <div className="milestones-grid desktop-only">
                 {milestones.map((m, i) => (
                   <div key={i} className={`milestone ${m.achieved ? 'achieved' : ''}`}>
                     <span className="milestone-icon">{m.icon}</span>
@@ -769,6 +774,47 @@ export default function RunCoach() {
                   </div>
                 ))}
               </div>
+              {/* Mobile carousel view - only achieved milestones */}
+              <div className="mobile-only">
+                <div
+                  className="carousel-container"
+                  ref={milestonesCarouselRef}
+                  onScroll={(e) => {
+                    const container = e.target;
+                    const scrollLeft = container.scrollLeft;
+                    const cardWidth = container.offsetWidth;
+                    const newIndex = Math.round(scrollLeft / cardWidth);
+                    setMilestonesCarouselIndex(newIndex);
+                  }}
+                >
+                  {milestones.filter(m => m.achieved).slice(0, 6).map((m, i) => (
+                    <div key={i} className="carousel-card milestone achieved">
+                      <span className="milestone-icon">{m.icon}</span>
+                      <h3 className="milestone-title">{m.title}</h3>
+                      <p className="milestone-desc">{m.desc}</p>
+                      <p className="milestone-date">{m.date}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="carousel-dots">
+                  {milestones.filter(m => m.achieved).slice(0, 6).map((_, i) => (
+                    <button
+                      key={i}
+                      className={`carousel-dot ${milestonesCarouselIndex === i ? 'active' : ''}`}
+                      onClick={() => {
+                        const container = milestonesCarouselRef.current;
+                        if (container) {
+                          container.scrollTo({
+                            left: i * container.offsetWidth,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }}
+                      aria-label={`Go to milestone ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </section>
 
             {/* Insights */}
@@ -776,22 +822,71 @@ export default function RunCoach() {
               <div className="section-header">
                 <h2 className="section-title">Training Insights</h2>
               </div>
-              <div className="insights-grid">
+              {/* Desktop grid view */}
+              <div className="insights-grid desktop-only">
                 <div className="insight-card positive">
-                <div className="insight-icon">📈</div>
-                <h3 className="insight-title">Pace Improving</h3>
-                <p className="insight-text">Your average pace has improved by 2+ min/mi since you started. Fantastic aerobic development!</p>
+                  <div className="insight-icon">📈</div>
+                  <h3 className="insight-title">Pace Improving</h3>
+                  <p className="insight-text">Your average pace has improved by 2+ min/mi since you started. Fantastic aerobic development!</p>
+                </div>
+                <div className="insight-card warning">
+                  <div className="insight-icon">💤</div>
+                  <h3 className="insight-title">Recovery Reminder</h3>
+                  <p className="insight-text">After your 10-mile run, consider extra rest. Long runs need 48-72 hours recovery.</p>
+                </div>
+                <div className="insight-card info">
+                  <div className="insight-icon">🎯</div>
+                  <h3 className="insight-title">Race Prediction</h3>
+                  <p className="insight-text">Based on current pace, you're on track for a 2:45-2:55 half marathon finish. Keep it up!</p>
+                </div>
               </div>
-              <div className="insight-card warning">
-                <div className="insight-icon">💤</div>
-                <h3 className="insight-title">Recovery Reminder</h3>
-                <p className="insight-text">After your 10-mile run, consider extra rest. Long runs need 48-72 hours recovery.</p>
-              </div>
-              <div className="insight-card info">
-                <div className="insight-icon">🎯</div>
-                <h3 className="insight-title">Race Prediction</h3>
-                <p className="insight-text">Based on current pace, you're on track for a 2:45-2:55 half marathon finish. Keep it up!</p>
-              </div>
+              {/* Mobile carousel view */}
+              <div className="mobile-only">
+                <div
+                  className="carousel-container"
+                  ref={insightsCarouselRef}
+                  onScroll={(e) => {
+                    const container = e.target;
+                    const scrollLeft = container.scrollLeft;
+                    const cardWidth = container.offsetWidth;
+                    const newIndex = Math.round(scrollLeft / cardWidth);
+                    setInsightsCarouselIndex(newIndex);
+                  }}
+                >
+                  <div className="carousel-card insight-card positive">
+                    <div className="insight-icon">📈</div>
+                    <h3 className="insight-title">Pace Improving</h3>
+                    <p className="insight-text">Your average pace has improved by 2+ min/mi since you started. Fantastic aerobic development!</p>
+                  </div>
+                  <div className="carousel-card insight-card warning">
+                    <div className="insight-icon">💤</div>
+                    <h3 className="insight-title">Recovery Reminder</h3>
+                    <p className="insight-text">After your 10-mile run, consider extra rest. Long runs need 48-72 hours recovery.</p>
+                  </div>
+                  <div className="carousel-card insight-card info">
+                    <div className="insight-icon">🎯</div>
+                    <h3 className="insight-title">Race Prediction</h3>
+                    <p className="insight-text">Based on current pace, you're on track for a 2:45-2:55 half marathon finish. Keep it up!</p>
+                  </div>
+                </div>
+                <div className="carousel-dots">
+                  {[0, 1, 2].map((i) => (
+                    <button
+                      key={i}
+                      className={`carousel-dot ${insightsCarouselIndex === i ? 'active' : ''}`}
+                      onClick={() => {
+                        const container = insightsCarouselRef.current;
+                        if (container) {
+                          container.scrollTo({
+                            left: i * container.offsetWidth,
+                            behavior: 'smooth'
+                          });
+                        }
+                      }}
+                      aria-label={`Go to insight ${i + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
             </section>
           </div>
