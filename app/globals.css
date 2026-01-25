@@ -2268,6 +2268,14 @@ footer strong {
     font-size: 28px;
   }
 
+  .sheet-hero-content {
+    text-align: center;
+  }
+
+  .sheet-section-title {
+    text-align: center;
+  }
+
   .sheet-info-grid {
     grid-template-columns: 1fr;
   }
@@ -2506,10 +2514,15 @@ footer strong {
 
   .modal-content {
     padding: 24px;
+    text-align: center;
   }
 
   .modal-title {
     font-size: 28px;
+  }
+
+  .modal-form {
+    text-align: left;
   }
 }
 
