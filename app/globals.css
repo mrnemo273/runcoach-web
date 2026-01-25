@@ -1634,9 +1634,19 @@ header::after {
 footer {
   text-align: center;
   padding: 48px 0;
-  border-top: 1px solid var(--cream-dark);
+  position: relative;
   color: var(--stone);
   font-size: 14px;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(-50vw + 50%);
+  right: 0;
+  height: 2px;
+  background: #000000;
 }
 
 footer strong {
