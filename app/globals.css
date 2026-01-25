@@ -74,11 +74,20 @@ header {
 .logo {
   display: flex;
   align-items: center;
-  position: fixed;
-  top: 28px;
-  left: 32px;
-  z-index: 1001;
   height: 48px;
+}
+
+/* Logo placeholder to maintain header layout when logo is fixed */
+.logo-placeholder {
+  display: none;
+  width: 150px;
+  height: 48px;
+}
+
+@media (min-width: 769px) {
+  .logo-placeholder {
+    display: block;
+  }
 }
 
 .logo-text {
@@ -202,6 +211,16 @@ header {
   display: block;
   width: 48px;
   height: 48px;
+}
+
+/* Desktop - ensure logo is fixed to browser edge */
+@media (min-width: 769px) {
+  .logo {
+    position: fixed;
+    top: 28px;
+    left: 32px;
+    z-index: 1001;
+  }
 }
 
 @media (max-width: 768px) {
