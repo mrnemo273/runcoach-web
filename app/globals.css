@@ -98,8 +98,7 @@ header {
 
 /* Desktop Navigation */
 .desktop-nav {
-  display: flex;
-  gap: 4px;
+  display: none;
 }
 
 .nav-link {
@@ -143,35 +142,43 @@ header {
 
 /* Hamburger Menu Button */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   padding: 0;
-  background: transparent;
+  background: var(--charcoal);
   border: none;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
-  gap: 6px;
+  gap: 5px;
   position: fixed;
   top: 28px;
   right: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .hamburger span {
   display: block;
-  width: 26px;
-  height: 2.5px;
-  background: var(--charcoal);
+  width: 20px;
+  height: 2px;
+  background: var(--white);
   border-radius: 2px;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
 }
 
 .hamburger.open span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger.open span:nth-child(2) {
@@ -180,36 +187,31 @@ header {
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Placeholder to maintain header layout on mobile */
+/* Placeholder to maintain header layout */
 .hamburger-placeholder {
-  display: none;
-  width: 44px;
-  height: 44px;
+  display: block;
+  width: 48px;
+  height: 48px;
 }
 
 @media (max-width: 768px) {
   .hamburger {
-    display: flex;
     top: 20px;
     right: 20px;
   }
-
-  .hamburger-placeholder {
-    display: block;
-  }
 }
 
-/* Mobile Navigation Overlay */
+/* Navigation Overlay */
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--cream);
+  background: var(--charcoal);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -239,7 +241,7 @@ header {
   padding: 16px 32px;
   border: none;
   background: transparent;
-  color: var(--stone);
+  color: var(--stone-light);
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: 0;
@@ -254,7 +256,7 @@ header {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-  color: var(--charcoal);
+  color: var(--white);
 }
 
 .mobile-nav-link.active {
@@ -282,12 +284,8 @@ header {
   }
 }
 
-/* Responsive - Show hamburger on mobile */
+/* Responsive - Mobile adjustments */
 @media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-
   .header-inner {
     display: flex;
     flex-direction: row;
@@ -307,7 +305,7 @@ header {
 
   .logo-dash {
     width: 12px;
-    height: 4px;
+    height: 2px;
   }
 
   .container {
