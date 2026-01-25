@@ -3029,6 +3029,7 @@ footer strong {
   }
   .race-info {
     max-width: 100%;
+    text-align: center;
   }
   .race-title {
     word-wrap: break-word;
