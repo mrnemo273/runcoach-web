@@ -80,7 +80,7 @@ header {
 .logo-text {
   font-family: 'Google Sans Code', monospace;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.5px;
   color: var(--charcoal);
   line-height: 1;
