@@ -3019,7 +3019,13 @@ footer strong {
   /* Extend to full screen width */
   margin-left: -20px;
   margin-right: -20px;
-  padding: 8px 20px 12px 20px;
+  padding: 8px 0 12px 0;
+  /* Snap cards to align with headline (20px from edge) */
+  scroll-padding-left: 20px;
+}
+
+.carousel-card:first-child {
+  margin-left: 20px;
 }
 
 .carousel-container::-webkit-scrollbar {
