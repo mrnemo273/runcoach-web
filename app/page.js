@@ -50,7 +50,7 @@ export default function RunCoach() {
         { week: 1, phase: 'Base', runs: ['3 mi', '4 mi', '5 mi'], status: 'completed' },
         { week: 2, phase: 'Base', runs: ['3 mi', '4 mi', '6 mi'], status: 'completed' },
         { week: 3, phase: 'Foundation', runs: ['3 mi', '5 mi', '10 mi'], status: 'completed' },
-        { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '6 mi'], status: 'current' },
+        { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '8 mi'], status: 'current' },
         { week: 5, phase: 'Build', runs: ['4 mi', '5 mi', '8 mi'], status: 'upcoming' },
         { week: 6, phase: 'Build', runs: ['4 mi', '6 mi', '9 mi'], status: 'upcoming' },
         { week: 7, phase: 'Build', runs: ['4 mi', '6 mi', '10 mi'], status: 'upcoming' },
