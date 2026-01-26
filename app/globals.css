@@ -1143,17 +1143,7 @@ header {
 }
 
 .milestone.achieved {
-  border: 2px solid var(--forest);
-}
-
-.milestone.achieved::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--forest);
+  /* Clean look without green border */
 }
 
 .milestone:not(.achieved) {
