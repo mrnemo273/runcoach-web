@@ -674,13 +674,20 @@ export default function RunCoach() {
                   const actualRun = runData.find(r => r.date === dateStr);
                   const plannedDistance = currentWeek.runs[index];
 
+                  // Determine run type based on distance
+                  const miles = parseFloat(plannedDistance);
+                  let runType = 'easy';
+                  if (miles > 7) runType = 'hard';
+                  else if (miles > 4) runType = 'medium';
+
                   return {
                     dayName: dayNames[index],
                     date: runDate,
                     dateStr,
                     plannedDistance,
                     actualRun,
-                    isCompleted: !!actualRun
+                    isCompleted: !!actualRun,
+                    runType
                   };
                 });
 
@@ -703,7 +710,7 @@ export default function RunCoach() {
                       {weekRuns.map((run, i) => (
                         <div
                           key={i}
-                          className={`this-week-run ${run.isCompleted ? 'completed' : ''}`}
+                          className={`this-week-run run-${run.runType} ${run.isCompleted ? 'completed' : ''}`}
                           onClick={() => !run.isCompleted && setActiveTab('logrun')}
                           style={{ cursor: run.isCompleted ? 'default' : 'pointer' }}
                         >
