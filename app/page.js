@@ -549,7 +549,7 @@ export default function RunCoach() {
               <div className="race-hero-inner">
                 <div className="race-info">
                   <div className="race-label">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div>
-                  <h1 className="race-title">Week 3: Let's get it!</h1>
+                  <h1 className="race-title">Let's get it!</h1>
                   <p className="race-meta">
                     This week we're keeping it steady. Build your base!
                   </p>

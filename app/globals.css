@@ -425,8 +425,9 @@ header {
 .race-title {
   font-family: 'Inter Tight', sans-serif;
   font-size: clamp(48px, 8vw, 72px);
+  font-weight: 900;
   line-height: 0.95;
-  letter-spacing: -1px;
+  letter-spacing: -0.04em;
   color: var(--charcoal);
   margin-bottom: 16px;
 }
