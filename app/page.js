@@ -548,10 +548,10 @@ export default function RunCoach() {
             <section className="race-hero animate-in delay-1">
               <div className="race-hero-inner">
                 <div className="race-info">
-                  <div className="race-label">YOUR NEXT RACE</div>
-                  <h1 className="race-title">DC Half Marathon</h1>
+                  <div className="race-label">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div>
+                  <h1 className="race-title">Week 3: Let's get it!</h1>
                   <p className="race-meta">
-                    March 21, 2026 · <strong>Week 3 of 12</strong> · Foundation Phase
+                    This week we're keeping it steady. Build your base!
                   </p>
                 </div>
                 <div className="countdown-container">
