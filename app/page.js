@@ -480,6 +480,9 @@ export default function RunCoach() {
       {/* Topographic Background */}
       <div className="topo-bg"></div>
 
+      {/* Street Texture Background */}
+      <div className="street-bg"></div>
+
       {/* Hamburger Menu Button - Outside container for proper z-index */}
       <button
         className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}
