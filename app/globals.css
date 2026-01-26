@@ -3325,6 +3325,286 @@ footer strong {
 }
 
 /* ========================================
+   THIS WEEK MODULE
+   ======================================== */
+
+.this-week-section {
+  background: linear-gradient(135deg, var(--white) 0%, rgba(232, 93, 4, 0.03) 100%);
+  border-radius: 24px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  border: 2px solid var(--burnt-orange);
+  box-shadow:
+    0 4px 24px rgba(232, 93, 4, 0.08),
+    0 1px 3px rgba(29, 29, 29, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.this-week-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--burnt-orange), var(--burnt-orange-light));
+}
+
+.this-week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.this-week-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.this-week-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--charcoal);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.this-week-phase {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 500;
+}
+
+.this-week-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.progress-text {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--burnt-orange);
+}
+
+.progress-bar-container {
+  width: 100px;
+  height: 8px;
+  background: var(--cream-dark);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--burnt-orange), var(--burnt-orange-light));
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.this-week-runs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.this-week-run {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.this-week-run:not(.completed):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(232, 93, 4, 0.15);
+  border-color: var(--burnt-orange-light);
+}
+
+.this-week-run:not(.completed):active {
+  transform: translateY(-2px);
+}
+
+.this-week-run.completed {
+  background: linear-gradient(135deg, rgba(45, 106, 79, 0.04) 0%, rgba(64, 145, 108, 0.08) 100%);
+  border-color: var(--forest-light);
+}
+
+.this-week-run.completed::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--forest), var(--forest-light));
+}
+
+.run-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.run-day-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.run-day-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--stone);
+  font-weight: 500;
+}
+
+/* Completed run styles */
+.run-completed-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.run-check-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--forest), var(--forest-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+}
+
+.run-check-icon svg {
+  width: 22px;
+  height: 22px;
+  color: var(--white);
+}
+
+.run-actual-stats {
+  flex: 1;
+}
+
+.run-actual-distance {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+.run-actual-time {
+  font-family: 'Google Sans Code', monospace;
+  font-size: 14px;
+  color: var(--forest);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.run-actual-pace {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--stone);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Planned (not completed) run styles */
+.run-planned-content {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.run-planned-distance {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--burnt-orange);
+  line-height: 1;
+}
+
+.run-tap-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--stone);
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .this-week-section {
+    padding: 20px;
+    margin-bottom: 24px;
+    border-radius: 20px;
+  }
+
+  .this-week-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .this-week-progress {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+  }
+
+  .this-week-runs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .this-week-run {
+    padding: 16px;
+  }
+
+  .run-completed-content {
+    gap: 12px;
+  }
+
+  .run-check-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .run-check-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .run-actual-distance {
+    font-size: 20px;
+  }
+
+  .run-planned-distance {
+    font-size: 28px;
+  }
+}
+
+/* ========================================
    TOAST NOTIFICATION
    ======================================== */
 
