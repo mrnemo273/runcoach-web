@@ -50,7 +50,7 @@ export default function RunCoach() {
         { week: 1, phase: 'Base', runs: ['3 mi', '4 mi', '5 mi'], status: 'completed' },
         { week: 2, phase: 'Base', runs: ['3 mi', '4 mi', '6 mi'], status: 'completed' },
         { week: 3, phase: 'Foundation', runs: ['3 mi', '5 mi', '10 mi'], status: 'completed' },
-        { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '6 mi'], status: 'current' },
+        { week: 4, phase: 'Foundation', runs: ['3 mi', '5 mi', '8 mi'], status: 'current' },
         { week: 5, phase: 'Build', runs: ['4 mi', '5 mi', '8 mi'], status: 'upcoming' },
         { week: 6, phase: 'Build', runs: ['4 mi', '6 mi', '9 mi'], status: 'upcoming' },
         { week: 7, phase: 'Build', runs: ['4 mi', '6 mi', '10 mi'], status: 'upcoming' },
@@ -649,6 +649,102 @@ export default function RunCoach() {
                   </div>
                 </div>
               </div>
+            </section>
+
+            {/* This Week Module */}
+            <section className="this-week-section animate-in delay-1">
+              {(() => {
+                // Get current week from training plan
+                const currentWeek = trainingPlan.find(w => w.status === 'current') || trainingPlan[0];
+                if (!currentWeek) return null;
+
+                // Calculate the dates for this week's runs (Tue, Thu, Sat)
+                const raceDay = new Date(selectedRace?.date || '2026-03-15');
+                const weeksBeforeRace = trainingPlan.length - currentWeek.week;
+                const weekStartDate = new Date(raceDay);
+                weekStartDate.setDate(raceDay.getDate() - (weeksBeforeRace * 7) - raceDay.getDay());
+
+                const runDays = [2, 4, 6]; // Tue, Thu, Sat
+                const dayNames = ['Tuesday', 'Thursday', 'Saturday'];
+
+                const weekRuns = runDays.map((dayOffset, index) => {
+                  const runDate = new Date(weekStartDate);
+                  runDate.setDate(weekStartDate.getDate() + dayOffset);
+                  const dateStr = runDate.toISOString().split('T')[0];
+                  const actualRun = runData.find(r => r.date === dateStr);
+                  const plannedDistance = currentWeek.runs[index];
+
+                  // Determine run type based on distance
+                  const miles = parseFloat(plannedDistance);
+                  let runType = 'easy';
+                  if (miles > 7) runType = 'hard';
+                  else if (miles > 4) runType = 'medium';
+
+                  return {
+                    dayName: dayNames[index],
+                    date: runDate,
+                    dateStr,
+                    plannedDistance,
+                    actualRun,
+                    isCompleted: !!actualRun,
+                    runType
+                  };
+                });
+
+                const completedCount = weekRuns.filter(r => r.isCompleted).length;
+
+                return (
+                  <>
+                    <div className="this-week-header">
+                      <div className="this-week-title-group">
+                        <h2 className="this-week-title">This week's runs</h2>
+                      </div>
+                      <div className="this-week-progress">
+                        <div className="progress-text">{completedCount} of 3</div>
+                        <div className="progress-bar-container">
+                          <div className="progress-bar-fill" style={{ width: `${(completedCount / 3) * 100}%` }}></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="this-week-runs">
+                      {weekRuns.map((run, i) => (
+                        <div
+                          key={i}
+                          className={`this-week-run run-${run.runType} ${run.isCompleted ? 'completed' : ''}`}
+                          onClick={() => !run.isCompleted && setActiveTab('logrun')}
+                          style={{ cursor: run.isCompleted ? 'default' : 'pointer' }}
+                        >
+                          <div className="run-day-header">
+                            <span className="run-day-name">{run.dayName}</span>
+                            <span className="run-day-date">
+                              {run.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </span>
+                          </div>
+                          {run.isCompleted ? (
+                            <div className="run-completed-content">
+                              <div className="run-check-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                              <div className="run-actual-stats">
+                                <div className="run-actual-distance">{run.actualRun.distance.toFixed(2)} mi</div>
+                                <div className="run-actual-time">{run.actualRun.duration}</div>
+                                <div className="run-actual-pace">{run.actualRun.pace}/mi</div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="run-planned-content">
+                              <div className="run-planned-distance">{run.plannedDistance}</div>
+                              <div className="run-tap-hint">Tap to log</div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                );
+              })()}
             </section>
 
             {/* Stats Strip */}
