@@ -3609,6 +3609,10 @@ footer strong {
   .run-planned-distance {
     font-size: 22px;
   }
+
+  .this-week-run:not(.completed):hover {
+    transform: none;
+  }
 }
 
 /* ========================================
