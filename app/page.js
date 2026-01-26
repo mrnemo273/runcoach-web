@@ -491,6 +491,11 @@ export default function RunCoach() {
         <span></span>
       </button>
 
+      {/* Logo - Outside container to match hamburger positioning */}
+      <div className="logo">
+        <div className="logo-text">RUN<span className="logo-dash"></span>COACH</div>
+      </div>
+
       {/* Mobile Navigation Overlay */}
       <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav">
@@ -514,9 +519,8 @@ export default function RunCoach() {
         {/* Header */}
         <header className="animate-in">
           <div className="header-inner">
-            <div className="logo">
-              <div className="logo-text">RUN<span className="logo-dash"></span>COACH</div>
-            </div>
+            {/* Logo placeholder for layout */}
+            <div className="logo-placeholder"></div>
             {/* Desktop Navigation */}
             <nav className="desktop-nav">
               {['dashboard', 'races', 'training', 'logrun', 'history'].map(tab => (
