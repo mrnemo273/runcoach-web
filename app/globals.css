@@ -3329,15 +3329,15 @@ footer strong {
    ======================================== */
 
 .this-week-section {
-  background: linear-gradient(135deg, var(--white) 0%, rgba(232, 93, 4, 0.03) 100%);
+  background: linear-gradient(135deg, #E8750A 0%, #F4A261 100%);
   border-radius: 24px;
   padding: 28px 32px;
   margin-bottom: 32px;
-  border: 2px solid var(--burnt-orange);
+  border: none;
   box-shadow:
-    0 4px 24px rgba(232, 93, 4, 0.08),
-    0 1px 3px rgba(29, 29, 29, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 8px 32px rgba(232, 93, 4, 0.25),
+    0 2px 8px rgba(29, 29, 29, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -3348,8 +3348,9 @@ footer strong {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--burnt-orange), var(--burnt-orange-light));
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
 .this-week-header {
@@ -3370,15 +3371,16 @@ footer strong {
   font-family: 'Inter Tight', sans-serif;
   font-size: 28px;
   font-weight: 800;
-  color: var(--charcoal);
+  color: var(--white);
   margin: 0;
   letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .this-week-phase {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: var(--stone);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
 }
 
@@ -3393,20 +3395,20 @@ footer strong {
   font-family: 'Inter Tight', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: var(--burnt-orange);
+  color: var(--white);
 }
 
 .progress-bar-container {
   width: 100px;
   height: 8px;
-  background: var(--cream-dark);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--burnt-orange), var(--burnt-orange-light));
+  background: var(--white);
   border-radius: 4px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -3418,19 +3420,20 @@ footer strong {
 }
 
 .this-week-run {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   padding: 20px;
-  border: 1px solid var(--cream-dark);
+  border: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .this-week-run:not(.completed):hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(232, 93, 4, 0.15);
-  border-color: var(--burnt-orange-light);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  background: var(--white);
 }
 
 .this-week-run:not(.completed):active {
@@ -3438,8 +3441,7 @@ footer strong {
 }
 
 .this-week-run.completed {
-  background: linear-gradient(135deg, rgba(45, 106, 79, 0.04) 0%, rgba(64, 145, 108, 0.08) 100%);
-  border-color: var(--forest-light);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .this-week-run.completed::after {
