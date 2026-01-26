@@ -548,10 +548,10 @@ export default function RunCoach() {
             <section className="race-hero animate-in delay-1">
               <div className="race-hero-inner">
                 <div className="race-info">
-                  <div className="race-label">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</div>
-                  <h1 className="race-title">Week 3</h1>
+                  <div className="race-label">{new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase()}</div>
+                  <h1 className="race-title">Let's get it!</h1>
                   <p className="race-meta">
-                    Let's get it!
+                    This week is all about building a strong foundation.
                   </p>
                 </div>
                 <div className="countdown-container">
