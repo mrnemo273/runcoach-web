@@ -63,7 +63,6 @@ body {
 /* Header */
 header {
   padding: 32px 0;
-  border-bottom: 1px solid var(--cream-dark);
 }
 
 .header-inner {
@@ -75,20 +74,55 @@ header {
 .logo {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 20px;
+  position: fixed;
+  top: 28px;
+  left: 32px;
+  z-index: 1001;
+  background: linear-gradient(
+    145deg,
+    #3a3a3a 0%,
+    #1d1d1d 50%,
+    #0f0f0f 100%
+  );
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo placeholder to maintain header layout when logo is fixed */
+.logo-placeholder {
+  display: none;
+  width: 180px;
+  height: 48px;
+}
+
+@media (min-width: 769px) {
+  .logo-placeholder {
+    display: block;
+  }
 }
 
 .logo-text {
   font-family: 'Google Sans Code', monospace;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  color: var(--charcoal);
+  color: var(--white);
+  line-height: 1;
 }
 
 .logo-dash {
   display: inline-block;
-  width: 16px;
-  height: 5px;
+  width: 12px;
+  height: 3px;
   background: var(--burnt-orange);
   margin: 0 4px;
   vertical-align: middle;
@@ -98,8 +132,7 @@ header {
 
 /* Desktop Navigation */
 .desktop-nav {
-  display: flex;
-  gap: 4px;
+  display: none;
 }
 
 .nav-link {
@@ -143,35 +176,48 @@ header {
 
 /* Hamburger Menu Button */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   padding: 0;
-  background: transparent;
+  background: linear-gradient(
+    145deg,
+    #3a3a3a 0%,
+    #1d1d1d 50%,
+    #0f0f0f 100%
+  );
   border: none;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
-  gap: 6px;
+  gap: 5px;
   position: fixed;
   top: 28px;
   right: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .hamburger span {
   display: block;
-  width: 26px;
-  height: 2.5px;
-  background: var(--charcoal);
+  width: 20px;
+  height: 2px;
+  background: var(--white);
   border-radius: 2px;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
 }
 
 .hamburger.open span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger.open span:nth-child(2) {
@@ -180,36 +226,40 @@ header {
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Placeholder to maintain header layout on mobile */
+/* Placeholder to maintain header layout */
 .hamburger-placeholder {
-  display: none;
-  width: 44px;
-  height: 44px;
+  display: block;
+  width: 48px;
+  height: 48px;
 }
 
 @media (max-width: 768px) {
   .hamburger {
-    display: flex;
     top: 20px;
     right: 20px;
   }
 
-  .hamburger-placeholder {
-    display: block;
+  .logo {
+    top: 20px;
+    left: 20px;
+  }
+
+  .logo-text {
+    font-size: 18px;
   }
 }
 
-/* Mobile Navigation Overlay */
+/* Navigation Overlay */
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--cream);
+  background: var(--charcoal);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -239,7 +289,7 @@ header {
   padding: 16px 32px;
   border: none;
   background: transparent;
-  color: var(--stone);
+  color: var(--stone-light);
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: 0;
@@ -254,7 +304,7 @@ header {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-  color: var(--charcoal);
+  color: var(--white);
 }
 
 .mobile-nav-link.active {
@@ -282,34 +332,8 @@ header {
   }
 }
 
-/* Responsive - Show hamburger on mobile */
+/* Responsive - Mobile adjustments */
 @media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  .header-inner {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .logo {
-    flex-shrink: 0;
-  }
-
-  .logo-text {
-    font-size: 26px;
-  }
-
-  .logo-dash {
-    width: 12px;
-    height: 4px;
-  }
-
   .container {
     padding: 0 20px;
   }
@@ -1623,7 +1647,6 @@ header {
 footer {
   text-align: center;
   padding: 48px 0;
-  border-top: 1px solid var(--cream-dark);
   color: var(--stone);
   font-size: 14px;
 }
