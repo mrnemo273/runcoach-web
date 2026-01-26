@@ -697,7 +697,7 @@ export default function RunCoach() {
                   <>
                     <div className="this-week-header">
                       <div className="this-week-title-group">
-                        <h2 className="this-week-title">This Week</h2>
+                        <h2 className="this-week-title">This week's runs</h2>
                       </div>
                       <div className="this-week-progress">
                         <div className="progress-text">{completedCount} of 3</div>
