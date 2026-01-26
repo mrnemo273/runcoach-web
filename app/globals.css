@@ -3407,27 +3407,30 @@ footer strong {
 
 /* Run type colors with glowing shadow effect */
 .this-week-run.run-easy {
-  background: linear-gradient(135deg, #4ADE80 0%, #86EFAC 100%);
+  background: linear-gradient(165deg, #86EFAC 0%, #4ADE80 50%, #3ECD72 100%);
   box-shadow:
     0 8px 24px rgba(74, 222, 128, 0.4),
     0 4px 8px rgba(74, 222, 128, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .this-week-run.run-medium {
-  background: linear-gradient(135deg, #FBBF24 0%, #FCD34D 100%);
+  background: linear-gradient(165deg, #FDE68A 0%, #FBBF24 50%, #F59E0B 100%);
   box-shadow:
     0 8px 24px rgba(251, 191, 36, 0.4),
     0 4px 8px rgba(251, 191, 36, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .this-week-run.run-hard {
-  background: linear-gradient(135deg, var(--burnt-orange) 0%, #F4A261 100%);
+  background: linear-gradient(165deg, #F4A261 0%, var(--burnt-orange) 50%, #D14F04 100%);
   box-shadow:
     0 8px 24px rgba(232, 93, 4, 0.4),
     0 4px 8px rgba(232, 93, 4, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    inset 0 2px 4px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .this-week-run:not(.completed):hover {
