@@ -3353,12 +3353,11 @@ footer strong {
 }
 
 .this-week-title {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--white);
   margin: 0;
-  letter-spacing: -0.3px;
 }
 
 
