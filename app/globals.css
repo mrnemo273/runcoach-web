@@ -3423,7 +3423,7 @@ footer strong {
 }
 
 .this-week-run.run-hard {
-  background: linear-gradient(135deg, var(--burnt-orange) 0%, #F4A261 100%);
+  background: linear-gradient(135deg, #D14F04 0%, var(--burnt-orange) 100%);
   box-shadow:
     0 8px 24px rgba(232, 93, 4, 0.4),
     0 4px 8px rgba(232, 93, 4, 0.3),
